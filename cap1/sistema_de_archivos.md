@@ -1,6 +1,3 @@
-# Persistencia básica en iOS
-
-Aquí veremos APIs básicos para almacenar datos
 
 ## Archivos y directorios en iOS
 
@@ -26,52 +23,49 @@ Los directorios más importantes son los siguientes:
     - `Application Support/`: contenido generado por la aplicación pero que no ha sido creado directamente por el usuario.
 - `tmp/`: como es lógico está reservado a archivos y directorios temporales, de los que iOS tampoco hará copia de seguridad.
 
-
-     
-
-
 ### Localizar los directorios del *sandbox*
 
 Antes de poder realizar cualquier operación sobre un archivo o directorio, tenemos primero que *localizarlo* en el sistema de archivos, es decir, encontrar su *path* absoluto - desde la raíz del sistema de archivos. Aunque en iOS no podemos “salirnos fuera” del *sandbox* este paso sigue siendo necesario. 
 
-En iOS podemos dar cualquier trayectoria de un archivo de dos formas distintas: como *path* local (un `NSString`) o  como URLs, que uniformizan el tratamiento de las rutas y nos permite también especificar la localización de recursos remotos. En el API las URLs se representan mediante un tipo especial, `NSURL`. Los nombres de los métodos que trabajan con *paths* generalmente acaban en `Path` y ocurre lo propio con los que trabajan con URLs (que, lógicamente, acaban en `URL`).
+En iOS podemos dar cualquier trayectoria de un archivo de dos formas distintas: como *path* local (un `String`) o  como URLs, que uniformizan el tratamiento de las rutas y nos permite también especificar la localización de recursos remotos. En Foundation las URLs se representan mediante un tipo especial, `URL`. Los nombres de los métodos que trabajan con *paths* generalmente acaban en `Path` y ocurre lo propio con los que trabajan con URLs (que, lógicamente, acaban en `URL`).
 
-En la documentación oficial de iOS Apple recomienda usar URLs en lugar de *paths*.
+En la documentación oficial de iOS Apple recomienda usar URLs en lugar de *paths*, ya que uniformizan el tratamiento de los recursos, sean locales o no.
 
-#### El directorio principal de la aplicación
+La clase básica que se usa para interactuar con el sistema de archivos es el `FileManager`. No es necesario crear una instancia, podemos obtener la instancia por defecto con `FileManager.default`
+
+#### El *bundle* de la aplicación
 
 Acceder al directorio con el *bundle* de la aplicación (el `.app`) es sencillo:
 
-    NSString *bundleDir = [[NSBundle mainBundle] bundlePath];
+```swift
+let bundleDir = Bundle.main.bundlePath
+```
 
-Ya hemos visto antes este tipo de código cuando accedíamos a imágenes y otros archivos distribuidos con la aplicación.
+Ya hemos visto antes este tipo de código cuando accedíamos a imágenes y otros archivos distribuidos junto a la aplicación.
 
-Con el método `bundleURL ` podemos obtener también el *path* en forma de URL (en el API un objeto `NSURL`).
+Con `bundleURL ` en lugar de `bundlePath` podemos obtener también el *path* en forma de URL (Un objeto de la clase `URL`).
 
 #### Los directorios “típicos”
 
-Para obtener la URL de un directorio del *sandbox* se usa el método `URLsForDirectory:inDomains`, de la clase `FileManager`, que es la que nos sirve para gestionar archivos y directorios. Al método le pasamos un par de constantes:
-- El tipo de directorio que estamos buscando (por ejemplo para `Library/` el valor es `NSLibraryDirectory`, para `Documents` es `NSDocumentDirectory` y para `Cache`, `NSCachesDirectory`). Se puede consultar la [referencia completa](https://developer.apple.com/library/ios/documentation/Cocoa/Reference/Foundation/Miscellaneous/Foundation_Constants/index.html#//apple_ref/doc/c_ref/NSSearchPathDirectory), aunque la mayoría de valores solo tienen sentido en OSX.
-- El “dominio” o ámbito de la búsqueda. Siempre usaremos el valor `NSUserDomainMask`, que en OSX indica el directorio del usuario, pero en iOS en realidad se refiere al ámbito de la aplicación actual. 
+Para obtener la URL de un directorio del *sandbox* se usa el método `urls(for:in:)`, de la clase `FileManager`. Al método le pasamos un par de constantes:
+
+- La clase de directorio que estamos buscando, como un valor enumerado del tipo `FileManager.SearchPathDirectory` (por ejemplo para `Library/` el valor es `libraryDirectory`, para `Documents` es `documentDirectory` y para `Cache`, `cachesDirectory`). Se puede consultar la [lista completa](https://developer.apple.com/reference/foundation/filemanager.searchpathdirectory), aunque la mayoría de valores solo tienen sentido en OSX.
+- El "dominio" o ámbito de la búsqueda, un valor enumerado del tipo `FileManager.SearchPathDomainMask`. En iOS siempre usaremos el valor `userDomainMask`, que en OSX indica el directorio del usuario, pero en iOS en realidad se refiere al ámbito de la aplicación actual. 
 
 Por ejemplo, así obtendríamos la URL del directorio `Documents` de la aplicación actual:
 
-
-    //El NSFileManager es la clase básica 
-    //para interactuar con el sistema de ficheros
-    NSFileManager *fileManager = [[NSFileManager alloc] init];
-    NSArray *urls = [fileManager 
-       URLsForDirectory:NSDocumentDirectory
-       inDomains:NSUserDomainMask];
-    //Nótese que se obtiene un array de URLs, no una sola
-    if ([urls count] > 0){
-       //Como en una app iOS solo hay un directorio 'Documents'
-       //será la primera posición del array
-       NSURL *docsFolder = urls[0];
-       NSLog(@"%@", docsFolder);
-    } else {
-       NSLog(@"Error al buscar el directorio 'Documents'");
-    }
+```swift
+let urls = FileManager.default.urls(for:.documentDirectory, in:.userDomainMask)
+//Nótese que el método devuelve un array de URLs
+//Casi siempre nos interesa solo la primera
+if(urls.count>0) {
+    let docDir = urls[0]
+    print("El directorio 'Documents' es \(docDir)")
+}
+else {
+    print("error al buscar el directorio 'Documents'")
+}
+```
 
 
 Si ejecutamos el código anterior en un dispositivo real nos aparecerá una URL del estilo `file:///var/mobile/Containers/Data/Application/id_de_la_aplicacion/Documents`.
@@ -80,43 +74,54 @@ En el simulador la URL será similar pero la primera parte de la trayectoria cam
 
 #### El directorio temporal
 
-Podemos obtener el *path* del directorio para archivos temporales con la función `NSTemporaryDirectory`. Nótese que es una función y no un método (como por ejemplo `NSLog`) .
+Podemos obtener el *path* del directorio para archivos temporales con la propiedad `temporaryDirectory` del *file manager*
 
-    NSString *tmpDir = NSTemporaryDirectory();
-    NSLog(@"Dir. archivos temporales: %@", tmpDir);
+```swift
+let tmpDir = FileManager.default.temporaryDirectory
+print("Dir. archivos temporales: \(tmpDir)")
+```
 
 > Durante el desarrollo en el simulador puede ser necesario localizar físicamente los directorios de la aplicación en el disco para poder verificar las operaciones sobre archivos y directorios. Para ayudarnos en esta tarea podemos usar alguna utilidad de terceros como la aplicación [Simpholders 2](http://simpholders.com)
 
 ### Listar el contenido de los directorios
 
-Sabiendo la URL de un determinado directorio podemos listar sus contenidos con el método `contentsOfDirectoryAtURL:includingPropertiesForKeys:options:error`
+Sabiendo la URL de un determinado directorio podemos listar sus contenidos con el método `contentsOfDirectory(at:includingPropertiesForKeys:options:)`
 
-    NSString *miBundleURL = [[NSBundle mainBundle] bundleURL];
-    NSError *error = nil;
-    NSArray *contenidos = [fileManager
-                           contentsOfDirectoryAtURL: miBundleURL
-                           includingPropertiesForKeys: @[
-                            NSURLCreationDateKey,
-                            NSURLIsDirectoryKey
-                       ];
-                           options: 0
-                           error:&error];
+El siguiente ejemplo toma el directorio donde está el *bundle* de la aplicación y lista sus contenidos, mostrando para cada elemento la fecha de creación y si es o no un directorio. 
 
-- El parámetro `includingPropertiesForKeys` es un array de constantes en el que especificamos la información que queremos obtener de cada uno de los items
-- options puede ser 0 o bien `NSDirectoryEnumerationSkipsHiddenFiles`para indicar que no queremos obtener los archivos o directorios ocultos.
-
-Para una URL que representa uno de los items listados podemos obtener una propiedad con el método `getResourceValue:forKey:error`. Continuando con el ejemplo anterior, para listar la fecha de creación de cada item, haríamos algo como:
-
-    for (NSURL *url in contenidos) {
-       NSDate *fecha;
-       NSError *error;
-       [url getResourceValue:&fecha 
-            forKey:NSURLCreationDateKey 
-            error:&error];
-       NSLog(@"%@ creado el %@",url.lastPathComponent, fecha);
+```swift
+let urlBundle = Bundle.main.bundleURL
+let contenidos = try! FileManager.default.contentsOfDirectory(at: urlBundle, 
+              includingPropertiesForKeys: [.creationDateKey, .isDirectoryKey], 
+              options: .skipsHiddenFiles)
+print("Hay \(contenidos.count) elementos")
+for url in contenidos {
+    print(url.lastPathComponent, terminator:"")
+    let rv = try! url.resourceValues(forKeys: [.creationDateKey, .isDirectoryKey])
+    print(" \(rv.creationDate!)", terminator:"")
+    if rv.isDirectory! {
+        print(" (DIR)")
     }
+    else  {
+       print("")
+    }
+}
+```
 
-Una versión simplificada del listado de directorios nos la da el método `contentsOfDirectoryAtPath:error` que trabaja a partir de un *path* en forma de `NSString` y como se ve no permite obtener propiedades de los items listados, solo nos devuelve un `NSArray` de `NSString` con los nombres.
+- El parámetro `includingPropertiesForKeys` es un array de constantes de la clase `URLResourceKey` donde especificamos la "meta-información" a obtener para cada item (por ejemplo tamaño, fecha de creación, si es o no un directorio, etc).
+- `options` puede ser 0 o bien `.skipsHiddenFiles`para indicar que no queremos obtener los archivos o directorios ocultos.
+
+Una vez obtenemos los items con `contentsOfDirectory`, mostramos sus datos, incluyendo la información obtenida. La "meta-información" sobre el archivo/directorio se obtiene con el método de la clase `URL` llamado `resourceValues`. Este nos devuelve un objeto `URLResourceValues` con propiedades que se corresponden con los datos de la "meta-información"
+
+Una versión simplificada del listado de directorios nos la da el método `contentsOfDirectory(atPath:)` que trabaja a partir de un *path* en forma de `String` y no permite obtener propiedades de los items, solo nos devuelve array de `String` con los nombres.
+
+```swift
+let pathBundle = Bundle.main.bundlePath
+let contenidos = try! FileManager.default.contentsOfDirectory(atPath: pathBundle)
+for nombre in contenidos {
+    print(nombre)
+}
+```
 
 ### Property lists
 
@@ -219,7 +224,7 @@ Desde el punto de vista del tipo de datos, las preferencias de usuario no son m�
 
     plutil -convert xml1 -o resultado_xml.plist fichero_original.plist
 
-A primera vista parece que solo poder usar objetos de *preference lists* pueda limitar bastante el ámbito de aplicación, pero hay que tener en cuenta que con un poco de ingenio probablemente no sea muy difícil transformar los datos de una clase cualquiera a un array o diccionario de cadenas, fechas y números. Y en el peor de los casos siempre podemos convertir cualquier clase propia a `NSData` mediante un proceso llamado `archiving` o `coding` (lo que en otros lenguajes como por ejemplo Java se suele denominar *serialización*). Veremos este proceso en sesiones posteriores.
+A primera vista parece que solo poder usar objetos de *property lists* pueda limitar bastante el ámbito de aplicación, pero hay que tener en cuenta que con un poco de ingenio probablemente no sea muy difícil transformar los datos de una clase cualquiera a un array o diccionario de cadenas, fechas y números. Y en el peor de los casos siempre podemos convertir cualquier clase propia a `NSData` mediante un proceso llamado `archiving` o `coding` (lo que en otros lenguajes como por ejemplo Java se suele denominar *serialización*). Veremos este proceso en sesiones posteriores.
 
 ### Acceder a las preferencias
 
