@@ -1,3 +1,3 @@
 # SQLite
 
-Aquí veremos cómo usar SQLite en iOS
+En este capítulo veremos cómo usar la base de datos SQLite en iOS. Esta base de datos es más adecuada que las herramientas del capítulo anterior si necesitamos hacer búsquedas o bien queremos guardar una cantidad de datos apreciable. Aunque Apple recomienda el uso del API Core Data para estas tareas, el uso de SQLite tiene la ventaja de presentar una baja barrera de entrada: simplemente conociendo SQL podemos trabajar con una base de datos relacional en iOS sin necesidad de aprender APIs complejos como Core Data. 

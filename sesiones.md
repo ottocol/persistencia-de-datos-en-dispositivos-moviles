@@ -1,12 +1,12 @@
 1. Persistencia básica
-2. Persistencia básica II. Calendarios
-3. SQLite
-4. Persistencia como servicio: Firebase
-5. Hola Core Data
-6. Modelos de datos
-7. Búsquedas
-8. Tablas
-9. Migraciones
-10. Arquitecturas
-11. ?
-12. ?
+2. SQLite
+3. Persistencia como servicio: Firebase
+4. Hola Core Data
+5. Modelos de datos
+6. Búsquedas
+7. Tablas
+8. Migraciones
+9. Arquitecturas I
+10. Arquitecturas II
+11. Proyecto I
+12. Proyecto II
