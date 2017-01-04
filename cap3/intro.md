@@ -1,0 +1,3 @@
+# Introducción
+
+En este tema nos introduciremos en el API iOS por excelencia para almacenar datos: Core Data. Este es uno de los APIs más complejos de la plataforma, y por eso le vamos a dedicar bastante tiempo. Empezaremos por implementar de manera guiada un ejemplo sencillo: una aplicación para guardar notas de texto. Esta aplicación nos servirá para irnos familiarizando con los conceptos básicos que hay que conocer para trabajar con Core Data.

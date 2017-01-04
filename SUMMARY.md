@@ -11,3 +11,8 @@
     - [El API básico de SQLite](cap2/2.2_API_SQLite.md)
     - [*Frameworks* de terceros](cap2/2.3_frameworks.md)
     - [Ejercicios](cap2/2.4_ejercicios.md)
+* [¡Hola Core Data!. Una aplicación de ejemplo](cap3/intro.md)
+    - [Introducción a Core Data](cap3/3.1_intro.md)
+    - [El *stack* de Core Data](cap3/3.2_stack.md)
+    - [Las entidades](cap3/3.3_entidades.md)
+    - [Recuperar los datos](cap3/3.4_recuperar_datos.md)
