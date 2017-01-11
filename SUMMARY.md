@@ -16,3 +16,8 @@
     - [El *stack* de Core Data](cap3/3.2_stack.md)
     - [Las entidades](cap3/3.3_entidades.md)
     - [Recuperar los datos](cap3/3.4_recuperar_datos.md)
+* [Modelos de datos en Core Data](cap4/intro.md)
+    - [Crear modelos](cap4/4.1_crear_modelo.md)
+    - [Entidades con clases propias](cap4/4.2_clases_propias.md)
+    - [CRUD](cap4/4.3_CRUD.md)
+    
