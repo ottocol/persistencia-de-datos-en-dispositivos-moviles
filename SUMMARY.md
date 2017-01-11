@@ -20,4 +20,5 @@
     - [Crear modelos](cap4/4.1_crear_modelo.md)
     - [Entidades con clases propias](cap4/4.2_clases_propias.md)
     - [CRUD](cap4/4.3_CRUD.md)
+    - [Ejercicios](cap4/4.4_ejercicios.md)
     
