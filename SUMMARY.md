@@ -21,4 +21,11 @@
     - [Entidades con clases propias](cap4/4.2_clases_propias.md)
     - [CRUD](cap4/4.3_CRUD.md)
     - [Ejercicios](cap4/4.4_ejercicios.md)
+* [Tablas en Core Data](cap6/intro.md)
+    - [El Fetched Results Controller](cap6/6.1_el_frc.md)
+* [Migraciones en Core Data](cap8/intro.md)
+    - [El problema de las migraciones](cap8/8.1_intro.md)
+  
+
+    
     

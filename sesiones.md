@@ -1,12 +1,14 @@
 1. Persistencia básica
 2. SQLite
-3. Persistencia como servicio: Firebase
-4. Hola Core Data
-5. Modelos de datos
-6. Búsquedas
+3. Hola Core Data
+4. Modelos de datos
+5. Más sobre modelos de datos
+6. Fetch requests
 7. Tablas
 8. Migraciones
-9. Arquitecturas I
-10. Arquitecturas II
-11. Proyecto I
-12. Proyecto II
+9. Concurrencia
+    - dos contextos: main thread + background, ejemplo syncing Kugler
+    - otro contexto para la tarea de importar
+10. Persistencia como servicio
+11. Arquitecturas I
+12. Arquitecturas II

@@ -1,10 +1,10 @@
 ## Ordenación de los resultados
 
-Hasta el momento hemos obtenido los resultados en el orden en que nos los da Core Data, que salvo para las relaciones ordenadas no asegura ningún orden específico. Podemos especificar diversos criterios de ordenación usando la clase `NSSortDescriptor`. Al igual que `NSPredicate`, esta clase no es propia de Core Data sino de Foundation, así que se puede usar también para ordenar colecciones en memoria.
+Hasta el momento hemos obtenido los resultados en el orden en que nos los da Core Data, que salvo para las relaciones ordenadas no asegura ningún orden específico. Podemos especificar diversos criterios de ordenación usando la clase `NSSortDescriptor`. Al igual que `NSPredicate`, esta clase no es propia de Core Data sino de oundation, así que se puede usar también para ordenar colecciones en memoria.
 
 ```swift
 let credSort = NSSortDescriptor(key:"creditos", ascending:false)
-let loginSort = NSSortDescriptor(key:"login" ascending:true);
+let loginSort = NSSortDescriptor(key:"login" ascending:true)
 miFetchRequest.sortDescriptors = [credSort, loginSort]
 ```
 
