@@ -29,19 +29,18 @@ Simplemente accedemos a la sección en cuestión y devolvemos su propiedad `numb
 
 Ya solo nos falta el método más complicado, el que **devuelve una fila dada su posición** o *index path*. En realidad es sencillo de implementar, porque el método `object(at:)` del *fetched results controller* nos devuelve un dato dado su *index path*. Solo tenemos que "empaquetar" la información en una celda.
 
+```swift
+override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+    //recordar que el prototipo de celda tiene un "reuse identifier"
+    //que hay que asignar en el storyboard
+    let cell = tableView.dequeueReusableCell(withIdentifier: "miCelda", for: indexPath)
+    
+    let mensaje = self.frc.object(at: indexPath)
+    cell.textLabel?.text = mensaje.texto!
+    return cell
+}
+```
 
-    - (UITableViewCell *)tableView:(UITableView *)tableView 
-                         cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-        //Recuerda cambiar el "cell" por tu reuse identifier
-        UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"cell" 
-                                           forIndexPath:indexPath];
-        NSManagedObject *nota = [self.frController objectAtIndexPath:indexPath];
-        cell.textLabel.text = [nota valueForKey:@"texto"];
-        return cell;
-    }
+Nótese que cuando inicializamos el *fetched results controller* lo hacemos con el tipo `Mensaje` (como `NSFetchedResultsController<Mensaje>`). Así que cuando obtenemos un objeto con `object(at:)` Swift "sabe" que es un `Mensaje` y no es necesario hacer el *cast*.
 
-La única diferencia con la versión anterior es que en lugar de obtener la nota de un `NSArray`, la obtenemos del  *fetched results controller*. 
-
-> Una alternativa a crear el *fetched results controller* manualmente, como se hace aquí, es usar la plantilla de Xcode de “Master/Detail” marcando “Use Core Data”. Generará automáticamente uno para la pantalla con la vista maestra, con todo el código configurado.
-
-Con todo esto ya tenemos la misma funcionalidad que teníamos antes, a partir de ahora vamos a ver qué ventajas adicionales nos da el nuevo *controller* frente a la versión anterior.
+Con todo esto ya tenemos la misma funcionalidad que teníamos cuando usábamos arrays para almacenar los datos de la tabla, a partir de ahora vamos a ver qué ventajas adicionales nos da el *fetched results controller* frente a la versión anterior.
