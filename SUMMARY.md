@@ -21,11 +21,30 @@
     - [Entidades con clases propias](cap4/4.2_clases_propias.md)
     - [CRUD](cap4/4.3_CRUD.md)
     - [Ejercicios](cap4/4.4_ejercicios.md)
-* [Tablas en Core Data](cap6/intro.md)
-    - [El Fetched Results Controller](cap6/6.1_el_frc.md)
-* [Migraciones en Core Data](cap8/intro.md)
-    - [El problema de las migraciones](cap8/8.1_intro.md)
-  
+* [Más sobre modelos de datos](cap4/intro.md)
+    - [Tipos de datos transformables](cap5/1_transformables.md)
+    - [Validaciones](cap5/2_validaciones.md)
+    - [El ciclo de vida de los objetos gestionados](cap5/3_ciclo_de_vida.md)
+    - [Deshacer y rehacer operaciones](cap5/4_undo.md)
+    - [Ejercicios](cap5/5_ejercicios.md)
+* [Búsquedas en Core Data](cap6/intro.md)
+    - [Predicados](cap6/1_predicados.md)
+    - [Ordenación](cap6/2_ordenacion.md)
+    - [Ejercicios](cap6/3_ejercicios.md)
+* [Tablas en Core Data](cap7/intro.md)
+    - [El *fetched results controller*](cap7/1_el_frc.md)
+    - [Inicializar el "fetched results controller"](cap7/2_configuracion_basica.md)
+    - [Mostrar los datos en la tabla](cap7/3_tabla.md)
+    - [Refrescar la tabla](cap7/4_refrescar_tabla.md)
+    - [Secciones de tabla automáticas](cap7/5_secciones.md)
+    - [Ejercicios](cap7/6_ejercicios.md)
+* [Migraciones de datos](cap8/intro.md)
+    - [Qué son las migraciones de datos](cap8/1_intro.md)
+    - [Versiones del modelo de datos](cap8/2_versiones.md)
+    - [Migraciones ligeras](cap8/3_migraciones_ligeras.md)
+    - [Migraciones pesadas](cap8/4_migraciones_pesadas.md)
+    
+    
 
     
     
