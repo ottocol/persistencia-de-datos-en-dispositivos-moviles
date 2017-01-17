@@ -21,3 +21,5 @@ do {
 ```
 
 El objeto `error` contiene bastante información sobre el error producido: un código de error que en este caso será el 1670 (indicando "cadena demasiado corta") y además un diccionario (propiedad `userInfo`) con múltiples datos sobre el error. Por desgracia la información es tediosa de extraer y además es bastante posible que no sea significativa para el usuario por lo que no podemos limitarnos a mostrarla en pantalla.
+
+Podemos escribir nuestros propios validadores añadiéndole a la clase de la entidad un método `validate<nombre_del_atributo>`, o sea si el atributo se llama `texto` el método sería `validateTexto`. Este método debe lanzar una excepción si el objeto no es válido. Podéis ver un ejemplo de este tipo de validación en [este tutorial](https://code.tutsplus.com/tutorials/data-validation-with-core-data-advanced-constraints--cms-26623).

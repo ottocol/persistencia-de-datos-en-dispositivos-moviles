@@ -14,3 +14,5 @@ Por ejemplo supongamos que en una entidad de Core Data quisiéramos almacenar un
 
 Ya no hay que hacer nada más. Nosotros trataremos con la propiedad como un array de `String` y automáticamente se hará la transformación hacia y desde binario, que es como se almacenan los datos.
 
+En caso de que el tipo de datos del atributo no sea conforme al protocolo `NSCoding` tendremos que escribir una clase propia que haga la transformación a y desde binario. En Cocoa esto se hace implementando una clase que herede de `NSValueTransformer`. Para ver un ejemplo concreto podéis consultar [este tutorial](http://bluelemonbits.com/index.php/2016/02/07/using-nsvaluetransformers-value-transformer-swift-2-0/).
+
