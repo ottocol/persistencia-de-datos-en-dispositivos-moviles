@@ -28,7 +28,7 @@ nuevaNota.set(value:"EL TEXTO QUE HAGA FALTA ASIGNAR", forKey:"texto")
 nuevaNota.fecha = "EL TEXTO QUE HAGA FALTA ASIGNAR"
 ```
 
-### Transformables (0,6)
+### Transformables (0,5)
 
 Vamos a añadirle a cada nota un campo que sea un array de *tags*, o palabras clave, dicho de otro modo. Es decir, un array de Strings.
 
@@ -41,7 +41,54 @@ Vamos a añadirle a cada nota un campo que sea un array de *tags*, o palabras cl
 "hola mundo".components(separatedBy:" ")  //devolvería ["hola", "mundo"]
 ```
 
-### Ciclo de vida de los objetos (0,1)
+### Deshacer operaciones (0,3)
 
-En la clase `Nota`, sobreescribe el método `awakeFromInsert` para que al crear una nota se le asigne la fecha actual (`Date()`)
+Vamos a hacer que se puedan borrar notas en la pantalla de lista pero que la *app* nos dé la oportunidad de deshacer la operación.
 
+Primero hay que hacer **que se puedan borrar filas**. Para que funcione el gesto del *swipe* a la izquierda, el *delegate* de la tabla tiene que implementar el método `tableView(_:,commit,forRowAt:)`. El *delegate* es `ListaNotasController`. Podéis descomentar el método, que aparece comentado, o mejor insertar directamente este, cuidado, faltan cosas que tendréis que rellenar:
+
+```swift
+override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let miDelegate = UIApplication.shared.delegate as! AppDelegate
+            let miContexto = miDelegate.persistentContainer.viewContext
+            //FALTA: Eliminar del almacenamiento persistente
+            ...
+            do {
+                //guardando el contexto
+                try miContexto.save()
+                //FALTA: Eliminar del array con el método "remove"
+                //este método devuelve el objeto eliminado. Guárdalo en una
+                //variable, te hará falta si hay que deshacer 
+                ...
+                //borrar visualmente la fila
+                tableView.deleteRows(at: [indexPath], with: .fade)
+            } catch {
+                print("Error al intentar guardar")
+            }
+        }
+    }
+```
+
+**Una vez implementadas las partes que faltan** en el código anterior, comprueba que efectivamente se pueden borrar las filas, y que eso borra la nota asociada. Es decir que al salir y entrar de la pantalla de lista de notas la nota borrada ya no vuelve a aparecer.
+
+Ahora vamos a meter un *action sheet* que se muestre tras borrar la fila y nos dé la oportunidad de deshacer la acción. Introduce este código tras la línea con el `tableView.deleteRows` del código anterior:
+
+```swift
+let actionSheet = UIAlertController(title: "",
+     message: "Se ha eliminado la fila",
+     preferredStyle: .actionSheet)
+let ok = UIAlertAction(title: "Continuar", style: .default)
+let deshacer = UIAlertAction(title: "Deshacer", style: .cancel) {
+     action in
+     //AQUI FALTA
+     // - llamar al "undo manager" para que deshaga la última operación
+     // - volver a insertar en el array la nota borrada, en la misma posición 
+     // - recargar los datos con `table.reloadData()`
+}
+actionSheet.addAction(ok)
+actionSheet.addAction(deshacer)
+self.present(actionSheet, animated: true)
+```
+
+Una vez implementado lo que falta en el código anterior, ya debería funcionar al completo la opción de deshacer
