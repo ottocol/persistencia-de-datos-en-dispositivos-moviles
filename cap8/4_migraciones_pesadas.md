@@ -14,13 +14,13 @@ Lo primero es crear una nueva versión del modelo de datos con este cambio.
 
 El nuevo modelo de datos tendrá el aspecto de la siguiente figura:
 
-![](modelo_datos_v3.png)
+![](img/modelo_datos_v3.png)
 
 ahora tenemos que crear el *mapping model* que nos transforme el modelo actual en el nuevo modelo. En `File > New` seleccionamos la categoría `Core Data` y elegimos la plantilla `Mapping Model`. El asistente nos preguntará cuál es el modelo origen, cuál el destino, y nos pedirá un nombre para el nuevo archivo `.xcmappingmodel` que creará.
 
 Si abrimos el archivo creado, veremos que Xcode ha intentado deducir la correspondencia entre el modelo origen y el destino. 
 
-![](mapping_model.png)
+![](img/mapping_model.png)
 
 A la izquierda veremos los *Entity Mappings* (cómo pasar de una entidad antigua a una nueva). Típicamente a estos los llama con el nombre de la entidad antigua y la nueva, algo como `NotaToNota`. Para las entidades nuevas pone simplemente el nombre de la entidad. 
 
@@ -30,11 +30,11 @@ Para cada Entity Mapping tenemos los *Attribute Mappings* y los *Relationship ma
 
 De la migración entre entidades del modelo “antiguo” y del “nuevo” se encarga la clase `NSEntityMigrationPolicy`. Si queremos personalizar la migración, como es nuestro caso para generar la nueva entidad `Categoria` a partir de los valores del antiguo atributo `categoria`, tendremos que crear una clase propia que herede de ella:
 
-![](create_migration_policy.png)
+![](img/create_migration_policy.png)
 
 Tendremos también que especificar en el Mapping Model que vamos a usar esta clase para hacer una migración de entidad determinada. Seleccionamos la migración `NotaToNota` y en las propiedades escribimos el nombre de la nueva clase en el campo `Custom Policy`.
 
-![](mapping_model_custom_policy.png)
+![](img/mapping_model_custom_policy.png)
 
 En la clase hay una serie de métodos que podemos sobreescribir para adaptar la migración a nuestras necesidades, pero el único que suele ser necesario es `createDestinationInstances(forSource:in:manager:)`, que se debe encargar de crear a partir de una instancia de la antigua entidad, la nueva entidad (o nuevas, si debe haber más de una). Este método se irá llamando para cada una de las entidades actualmente en el almacén persistente, para irlas migrando una a una. 
 
