@@ -2,6 +2,8 @@
 
 Vamos a ampliar la dichosa aplicación de notas para que use un *fetched results controller*.
 
+> Las modificaciones de estos ejercicios no afectan al código de las sesiones anteriores, así que no es necesario que hagas ninguna copia del estado del proyecto antes de empezar con esta sesión.
+
 ## Interfaz gráfico (0,2)
 
 Añade una tercera pantalla (un `Table View Controller`) a la aplicación de notas en la que se vea un listado de todas las notas usando un `NSFetchResultsController` (no es necesario implementar búsqueda). Conecta la primera pantalla a esta (`Ctrl+Arrastrar` y elegir como tipo de *segue* `View Controllers`). Al final en la aplicación tendrás un *tab bar* con tres opciones.
@@ -18,11 +20,11 @@ Recuerda hacer en el *storyboard* que esta clase sea el *controller* de esta pan
 
 - Siguiendo el código de los apuntes y las transparencias haz que se use un *fetched results controller* para mostrar todas las notas.
 
-- Una vez tengas el listado básico consigue que cuando se inserte una nueva nota en la pantalla de notas aparezca en la tabla.
+- Una vez tengas el listado básico consigue que cuando se inserte una nueva nota aparezca en la tabla
  
 - Luego, haz además que se puedan borrar notas haciendo *swipe to delete* en la tabla.
 
-- Finalmente, haz que la tabla tenga secciones automáticas según la primera letra del texto de cada nota. Para ello puedes crear una extensión de la clase `Nota` y añadirle una propiedad calculada llamada `comienzo` que devuelva solo esta:
+- Finalmente, haz que la tabla tenga secciones automáticas según la primera letra del texto de cada nota. Para ello puedes crear una extensión de la clase `Nota` y añadirle una propiedad calculada llamada `inicial` que devuelva solo esta:
 
 ```swift
 //Archivo Nota+Custom.swift
@@ -30,7 +32,7 @@ import Foundation
 
 extension Nota {
     //Devuelve una subcadena solo con la primera letra del texto
-    var comienzo: String? {
+    var inicial: String? {
         if let textoNoNil = self.texto {
             let pos2 = textoNoNil.index(after: textoNoNil.startIndex)
             return textoNoNil.substring(to:pos2)
