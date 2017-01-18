@@ -93,8 +93,11 @@ let deshacer = UIAlertAction(title: "Deshacer", style: .cancel) {
      action in
      //AQUI FALTA
      // - llamar al "undo manager" para que deshaga la última operación
-     // - volver a insertar en el array la nota borrada, en la misma posición 
-     // - recargar los datos con `table.reloadData()`
+     // - volver a insertar en el array la nota borrada, en la misma posición
+
+     
+     //Esto ya está hecho, recargamos datos para que se repinten 
+     tableView.reloadData()
 }
 actionSheet.addAction(ok)
 actionSheet.addAction(deshacer)
