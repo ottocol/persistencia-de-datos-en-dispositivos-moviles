@@ -72,7 +72,17 @@ override func tableView(_ tableView: UITableView, commit editingStyle: UITableVi
 
 **Una vez implementadas las partes que faltan** en el código anterior, comprueba que efectivamente se pueden borrar las filas, y que eso borra la nota asociada. Es decir que al salir y entrar de la pantalla de lista de notas la nota borrada ya no vuelve a aparecer.
 
-Ahora vamos a meter un *action sheet* que se muestre tras borrar la fila y nos dé la oportunidad de deshacer la acción. Introduce este código tras la línea con el `tableView.deleteRows` del código anterior:
+Para que el *undo manager* que vamos a meter luego nos funcione, hay que inicializarlo. En la clase `AppDelegate`, meter la siguiente línea (insertar en la línea 73, justo antes del `return container`)
+
+```swift
+container.viewContext.undoManager = UndoManager()
+```
+
+Ahora seguimos con `ListaNotasController`. Vamos a meter un *action sheet* que se muestre tras borrar la fila y nos dé la oportunidad de deshacer la acción. 
+
+![](img/quieres_deshacer.png)
+
+Introduce este código tras la línea con el `tableView.deleteRows` del código anterior:
 
 ```swift
 let actionSheet = UIAlertController(title: "",
