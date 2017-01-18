@@ -10,7 +10,7 @@ En el *storyboard* arrastrar una `Search bar` a la parte superior de la pantalla
 
 ![](img/search_bar_top.png)
 
-Para que la barra de *status* de la parte superior (la hora, la batería,...) no moleste, implementar este método en `ListaNotasController`
+Para que la barra de *status* de la parte superior (la hora, la batería,...) no moleste, "sobreescribimos" la propiedad `prefersStatusBarHidden`  en `ListaNotasController`
 
 ```swift
 override var prefersStatusBarHidden: Bool {
