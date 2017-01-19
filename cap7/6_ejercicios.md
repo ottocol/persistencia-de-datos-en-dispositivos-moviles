@@ -20,9 +20,9 @@ Recuerda hacer en el *storyboard* que esta clase sea el *controller* de esta pan
 
 - Siguiendo el código de los apuntes y las transparencias haz que se use un *fetched results controller* para mostrar todas las notas.
 
-- Una vez tengas el listado básico vamos a intentar que cuando se modifiquen notas se muestren en la tabla. Para esto hay que implementar lo que aparece en la sección ["Refrescar la tabla"](https://ottocol.gitbooks.io/persistencia-de-datos-en-dispositivos-moviles/content/cap7/4_refrescar_tabla.html) de los apuntes.
+- Una vez tengas el listado básico vamos a intentar que cuando se modifiquen notas se muestren en la tabla. Para esto hay que implementar lo que aparece en la sección ["Refrescar la tabla"](https://ottocol.gitbooks.io/persistencia-de-datos-en-dispositivos-moviles/content/cap7/4_refrescar_tabla.html) de los apuntes. Comprueba que cuando insertamos una nota nueva en la pantalla de notas se muestra en la lista del *fetched results controller*
  
-Para probar que funciona, haz que se puedan borrar notas haciendo *swipe to delete* en la tabla. Para que funcione este gesto, hay que implementar el método
+- Para ver cómo se modifican las filas "en directo", haz que se puedan borrar notas haciendo *swipe to delete* en la tabla. Para que funcione este gesto, hay que implementar el método
 
 ```swift
 override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
