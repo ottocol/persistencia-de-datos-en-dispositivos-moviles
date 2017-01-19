@@ -55,7 +55,7 @@ Una vez comprobado que funciona, **mejora la fetch request para que las notas ap
 
 ### Uso de una *fetch request template* (0,4 puntos)
 
-Editar el modelo de datos y añadir una *fetch request template*, llamada `Universidad` que devuelva todas las notas que contengan el *hashtag* `#uni`. 
+Editar el modelo de datos y añadir una *fetch request template*, llamada `Universidad` que devuelva todas las notas cuyo texto contenga la subcadena `#uni`. 
 
 > En el editor del modelo de datos, pulsa sobre el botón de “Add Entity” y mantenlo pulsado unos segundos para que aparezca la opción de “Add Fetch Request”. También puedes hacerlo desde el menú `Editor`.
 
