@@ -92,13 +92,15 @@ Lo único que nos falta es configurar el *persistent store coordinator* para esp
 //CUIDADO: el name cambia, según el nombre del proyecto
 let container = NSPersistentContainer(name: "PruebaMigraciones")
 
-let urls = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
+let urls = FileManager.default.urls(for: .applicationSupportDirectory, in: .userDomainMask)
 //CUIDADO: la cadena cambia, según el nombre del proyecto
-let urlBD = self.urls[0].appendingPathComponent("PruebaMigraciones.sqlite")
+let urlBD = urls[0].appendingPathComponent("PruebaMigraciones.sqlite")
 let psd = NSPersistentStoreDescription(url: urlBD)
 //que no se intente automatizar la migración
 psd.shouldInferMappingModelAutomatically = false
 psd.type = NSSQLiteStoreType
+
+container.persistentStoreDescriptions = [psd]
 ```
 
 Y ya está. Solo nos falta en el editor del modelo de datos *establecer como versión actual del modelo de datos la nueva versión*

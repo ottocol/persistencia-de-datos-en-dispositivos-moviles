@@ -43,6 +43,7 @@
     - [Versiones del modelo de datos](cap8/2_versiones.md)
     - [Migraciones ligeras](cap8/3_migraciones_ligeras.md)
     - [Migraciones pesadas](cap8/4_migraciones_pesadas.md)
+    - [Apéndice: migraciones en iOS<=9](cap8/apendice_migraciones_ios9.md)
     
     
 
