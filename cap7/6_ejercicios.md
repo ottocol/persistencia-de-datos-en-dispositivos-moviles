@@ -20,9 +20,26 @@ Recuerda hacer en el *storyboard* que esta clase sea el *controller* de esta pan
 
 - Siguiendo el código de los apuntes y las transparencias haz que se use un *fetched results controller* para mostrar todas las notas.
 
-- Una vez tengas el listado básico consigue que cuando se inserte una nueva nota aparezca en la tabla
+- Una vez tengas el listado básico vamos a intentar que cuando se modifiquen notas se muestren en la tabla. Para esto hay que implementar lo que aparece en la sección ["Refrescar la tabla"](https://ottocol.gitbooks.io/persistencia-de-datos-en-dispositivos-moviles/content/cap7/4_refrescar_tabla.html) de los apuntes.
  
-- Luego, haz además que se puedan borrar notas haciendo *swipe to delete* en la tabla.
+Para probar que funciona, haz que se puedan borrar notas haciendo *swipe to delete* en la tabla. Para que funcione este gesto, hay que implementar el método
+
+```swift
+override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let miDelegate = UIApplication.shared.delegate as! AppDelegate
+            let miContexto = miDelegate.persistentContainer.viewContext
+            //FALTA: eliminar del contexto el objeto en la pos. indexPath
+            //Tenéis que obtenerlo del fetched results controller
+            //parecido a como se hace para pintar la celda
+            ...
+            //guardamos el contexto
+            try! miContexto.save()
+        }
+}
+```
+
+Ahora puedes probar a borrar una celda y ver cómo al eliminar el objeto del contexto se actualiza en la tabla.
 
 - Finalmente, haz que la tabla tenga secciones automáticas según la primera letra del texto de cada nota. Para ello puedes crear una extensión de la clase `Nota` y añadirle una propiedad calculada llamada `inicial` que devuelva solo esta:
 
