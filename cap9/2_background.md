@@ -32,7 +32,7 @@ let miDelegate = UIApplication.shared.delegate as! AppDelegate
 let contextoBG = miDelegate.persistentContainer.newBackgroundContext()
 ```
 
-En versiones anteriores de iOS era necesario crear el contexto directamente (un objeto de la clase `NSManagedObjectContext`) y el el inicializador indicar que queríamos asociarlo a una cola de operaciones que no fuera la principal. Una vez creado el contexto, con el método `performBlock` podemos ejecutar una operación en su cola asociada.
+En versiones anteriores de iOS era necesario crear el contexto directamente (un objeto de la clase `NSManagedObjectContext`) y en el inicializador indicar que queríamos asociarlo a una cola de operaciones que no fuera la principal. Una vez creado el contexto, con el método `performBlock` podemos ejecutar una operación en su cola asociada.
 
 ```swift
 let nuevoContexto = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
@@ -43,4 +43,4 @@ nuevoContexto.performBlock() {
 }
 ```
 
-> Crear un contexto tal cual se ha visto en este último ejemplo no tiene sentido de manera aislada. Para que funcione, el contexto de persistencia tiene que estar conectado a otras "piezas" del *stack* de Core Data, típicamente a un `NSPersistentStoreCoordinator`. Solo se pone el ejemplo para que se vea qué está en realidad haciendo internamente el `performBackgroundTask` que hemos visto en el primer ejemplo.
+> Crear el contexto tal cual se ha visto en este último ejemplo no tiene sentido de manera aislada. Para que funcione, el contexto de persistencia tiene que estar conectado a otras "piezas" del *stack* de Core Data, típicamente a un `NSPersistentStoreCoordinator`. Omitiremos esa parte para simplificar, pero para ello podrías adaptar el código generado por Xcode en versiones anteriores a la 8 que se vio en la primera sesión de Core Data.
