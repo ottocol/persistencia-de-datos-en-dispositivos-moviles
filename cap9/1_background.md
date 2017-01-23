@@ -34,12 +34,12 @@ let miDelegate = UIApplication.shared.delegate as! AppDelegate
 let contextoBG = miDelegate.persistentContainer.newBackgroundContext()
 ```
 
-En versiones anteriores de iOS era necesario crear el contexto directamente (un objeto de la clase `NSManagedObjectContext`) y en el inicializador indicar que queríamos asociarlo a una cola de operaciones que no fuera la principal. Una vez creado el contexto, con el método `performBlock` podemos ejecutar una operación en su cola asociada.
+En versiones anteriores de iOS era necesario crear el contexto directamente (un objeto de la clase `NSManagedObjectContext`) y en el inicializador indicar que queríamos asociarlo a una cola de operaciones que no fuera la principal. Una vez creado el contexto, con los métodos `perform` o `performAndWait` podemos ejecutar una operación en su cola asociada. El primero es asíncrono y el segundo síncrono, como su propio nombre indica.
 
 ```swift
 let nuevoContexto = NSManagedObjectContext(concurrencyType:.privateQueueConcurrencyType)
 ...
-nuevoContexto.performBlock() {
+nuevoContexto.perform() {
    //Aquí vendría la operación costosa
    ...
 }
