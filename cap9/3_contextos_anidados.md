@@ -7,6 +7,19 @@ En iOS5 se introdujo la posibilidad de tener un contexto "conectado" con otro en
 
 ![](img/multiples_contextos.png)
 
+
+Cuando un contexto está "conectado" a un "persistent store coordinator" fijamos el valor de su propiedad `persistentStoreCoordinator`. Para indicar que está conectado a otro contexto "padre" fijamos el valor de `parent`
+
+```swift
+let contextoPadre = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+//El padre está conectado a un "persistent store coordinator"
+contextoPadre.persistentStoreCoordinator = ...
+let contextoHijo = NSManagedObjectContext(concurrencyType: .mainQueueConcurrencyType)
+//El hijo está conectado al padre
+contextoHijo.parent = contextoPadre
+```
+
+
 ¿Para qué sirve anidar contextos?. Típicamente se suelen describir dos casos de uso distintos: usar el contexto hijo como un "borrador" para realizar operaciones que podemos descartar en cualquier momento, y como una forma de hacer `save` en *background*.
 
 Veamos el primero de los usos. Pensemos en una aplicación que tenga una pantalla de edición de datos que implique la creación y relación entre sí de varios objetos. Por ejemplo si estamos editando un pedido de una tienda online tendremos varias entidades implicadas como `Pedido`, `Item`, etc. Si en un momento dado el usuario se "arrepiente" de hacer el pedido y quiere cancelarlo debemos ser capaces de poder eliminar todas las entidades que hemos creado en el proceso, y los cambios que hayamos hecho en las existentes. Los contextos anidados nos dan la posibilidad de implementar esta funcionalidad de forma muy sencilla: lo único que tenemos que hacer es crear todas estas entidades y hacer las modificaciones en un nuevo contexto hijo del principal. Para guardar los cambios que hagamos en ese contexto, haremos `save` en él y luego también en el principal. Si por el contrario queremos anular lo hecho en el contexto hijo en realidad no hace falta hacer nada especial. Simplemente no nos molestamos en hacer el `save` del hijo y seguimos trabajando con el padre.
