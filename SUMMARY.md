@@ -45,6 +45,11 @@
     - [Migraciones pesadas](cap8/4_migraciones_pesadas.md)
     - [Ejercicios](cap8/5_ejercicios.md)
     - [Apéndice: migraciones en iOS<=9](cap8/apendice_migraciones_ios9.md)
+* [Contextos múltiples](cap9/intro.md)
+    - [Introducción](cap9/1_intro.md)
+    - [Múltiples contextos para trabajos en *background*](2_background.md)
+    - [Comunicación entre contextos](cap9/3_comunicacion.md)
+    - [Contextos anidados](cap9/4_contextos_anidados.md)
     
     
 
