@@ -87,9 +87,11 @@ En el editor del modelo podemos crear un *fetch request template* pulsando unos 
 
 > El editor visual de templates introduce comillas de más en los nombres de las variables, quedando expresiones como `nombre BEGINS WITH "$cadena"`. En este caso la variable no se reconocería como tal al estar entre comillas. Si vamos a usar variables es mejor usar el editor en modo texto. Podemos pasar a este modo pulsando el segundo de los botones que aparecen en la parte superior derecha del editor. 
 
-Para ejecutar la *template* en nuestro código tenemos que recuperarla por nombre a partir del modelo de datos (el `NSManagedObjectModel`). Este modelo es accesible desde el `PersistentContainer`. Además necesitaremos un diccionario que especifique nombre y valor para cada variable. Para el ejemplo de la figura anterior:
+Para ejecutar la *template* en nuestro código tenemos que recuperarla por nombre a partir del modelo de datos (el `NSManagedObjectModel`). Este modelo es accesible en la propiedad `managedObjectModel` del `PersistentContainer`. Además necesitaremos un diccionario que especifique nombre y valor para cada variable. Para el ejemplo de la figura anterior:
 
 ```swift
+let miDelegate = UIApplication.shared.delegate as! AppDelegate
+let miModelo = miDelegate.persistentContainer.managedObjectModel 
 let dictVars = ["cadena":"iOS"]
 if let queryTmpl = miModelo.fetchRequestFromTemplate(withName: "textoContiene", substitutionVariables: dictVars) {
     let results = try! miContexto.fetch(queryTmpl) as! [Mensaje]
