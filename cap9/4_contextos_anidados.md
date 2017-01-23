@@ -1,0 +1,10 @@
+
+## Contextos anidados
+
+El contexto de persistencia está conectado con un *Persistent Store Coordinator*, cuyo trabajo, como su propio nombre indica, es el de gestionar el almacenamiento persistente. Cuando almacenamos un objeto haciendo `save` del contexto, es el *store coordinator* el que se encarga de "pelearse" con la base de datos SQLite (o con el almacenamiento que sea). Cuando tenemos varios contextos, típicamente están todos "conectados" con el mismo *coordinator*.
+
+
+
+En iOS5 se introdujo la posibilidad de tener un contexto "conectado" con otro en lugar de con un *coordinator*. Esto se conoce también como *contexto hijo*. El hijo está "conectado" con el padre y el padre es el "conectado" al *coordinator*. Cuando desde el hijo se hace un `save` no se están guardando los datos en el almacenamiento persistente, sino en el contexto padre. Para guardarlos en el almacenamiento persistente el padre también tendría que hacer `save`. 
+
+¿Para qué sirve anidar contextos?. Pensemos en una aplicación que tenga una pantalla de edición de datos que implique la creación y relación entre sí de varios objetos. Por ejemplo si estamos editando un pedido de una tienda online tendremos varias entidades implicadas como `Pedido`, `Item`, etc. Si en un momento dado el usuario se "arrepiente" de hacer el pedido y quiere cancelarlo debemos ser capaces de poder eliminar todas las entidades que hemos creado en el proceso, y los cambios que hayamos hecho en las existentes. Los contextos anidados nos dan la posibilidad de implementar esta funcionalidad de forma muy sencilla: lo único que tenemos que hacer es crear todas estas entidades y hacer las modificaciones en un nuevo contexto hijo del principal. Para guardar los cambios que hagamos en ese contexto, haremos `save` en él y luego también en el principal. Si por el contrario queremos anular lo hecho en el contexto hijo en realidad no hace falta hacer nada especial. Simplemente no nos molestamos en hacer el `save` del hijo y seguimos trabajando con el padre.
