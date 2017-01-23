@@ -49,6 +49,7 @@
     - [Múltiples contextos para trabajos en *background*](1_background.md)
     - [Comunicación entre contextos](cap9/2_comunicacion.md)
     - [Contextos anidados](cap9/3_contextos_anidados.md)
+    - [Ejercicios](cap9/4_ejercicios.md)
     
     
 
