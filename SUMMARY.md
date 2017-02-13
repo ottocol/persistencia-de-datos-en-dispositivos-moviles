@@ -50,6 +50,11 @@
     - [Comunicación entre contextos](cap9/2_comunicacion.md)
     - [Contextos anidados](cap9/3_contextos_anidados.md)
     - [Ejercicios](cap9/4_ejercicios.md)
+* [Arquitecturas de aplicaciones en iOS](cap10/intro.md)
+    - [Model/View/Controller](cap10/2_MVC.md)
+    - [Model/View/Presenter](cap10/3_MVP.md)
+    - [Model/View/ViewModel](cap10/4_MVVM.md)
+    - [VIPER](cap10/5_VIPER.md)
     
     
 

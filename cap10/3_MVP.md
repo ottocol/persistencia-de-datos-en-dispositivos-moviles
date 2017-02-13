@@ -14,13 +14,15 @@ Lo primero que vamos a hacer es formalizar la interfaz de los tres componentes, 
 
 ![](img/mvp_UAdivino.png)
 
-Cuando se pulsa el botón de "obtener respuesta" la *vista* llama a `solicitarRespuesta()` del *presentador*. Este a su vez le pide al modelo que "haga el trabajo", generando una respuesta al  azar. La respuesta contiene un texto y un booleano indicando si es positiva o negativa. Con este último el *presentador* calcula el color (verde o rojo, respectivamente), y le pasa texto y color a la vista para que lo muestre.
+Cuando se pulsa el botón de "obtener respuesta" la *vista* llama a `solicitarRespuesta()` del *presentador*. Este a su vez le pide al modelo que "haga el trabajo", generando una respuesta al  azar. La respuesta contiene un texto y un booleano indicando si es positiva o negativa. Con este último el *presentador* calcula el color (verde o rojo, respectivamente), y le pasa texto y color a la vista para que lo muestre. En este caso la "lógica de presentación" consiste simplemente en calcular el color correspondiente a la respuesta.
 
 > Al ser este un ejemplo muy sencillo el modelo no necesita notificaciones para "avisar" al *presentador* de que hay datos que mostrar. Una aplicación que hiciera una búsqueda en un servicio web llamaría a un *callback* del *presenter* cuando se hubieran recibido los datos.
 
 Podéis ver el [código fuente completo](https://github.com/ottocol/ejemplos-arquitectura-iOS/tree/master/MVP) en el repositorio de GitHub.
 
+### Ensamblado de la arquitectura
 
+*vista* y *presentador* deben comunicar el uno con el otro, así que cada uno debe tener una referencia al otro.
 
 
 
