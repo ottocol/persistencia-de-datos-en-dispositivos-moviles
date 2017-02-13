@@ -29,6 +29,8 @@ En nuestro ejemplo del `UAdivino` queremos vincular dos propiedades del *viewmod
 Así, definiremos el texto de la respuesta como un observable "de tipo" `String` en lugar de simplemente como un `String`, para poder vincularlo a la vista. En el *viewmodel* haríamos esto para crear el observable con un valor inicial de "" (cadena vacía):
 
 ```swift
+import Bond
+
 let textoResp = Observable<String>("")
 ```
 
