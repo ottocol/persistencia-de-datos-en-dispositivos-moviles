@@ -49,7 +49,7 @@ Hecha toda la preparación de la interfaz, falta implementar la búsqueda en sí
 
 > Crea la *fetch request* por código, no uses una *template* ya que eso lo harás en el ejercicio siguiente.
 
-Recuerda que para que se actualicen los datos visibles debes llamar a `tableView.reloadData()``
+Recuerda que para que se actualicen los datos visibles debes llamar a `tableView.reloadData()`
 
 Una vez comprobado que funciona, **mejora la fetch request para que las notas aparezcan en orden inverso por fecha**, de más reciente a más antigua
 
