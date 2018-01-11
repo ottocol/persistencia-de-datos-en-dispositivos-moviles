@@ -47,8 +47,6 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
 Hecha toda la preparación de la interfaz, falta implementar la búsqueda en sí. En el método `searchBarSearchButtonClicked` **debes crear una fetch request que busque las notas cuyo texto contenga la cadena escrita** en la barra de búsqueda, sin distinguir mayúsculas/minúsculas o caracteres diacríticos. 
 
-> Crea la *fetch request* por código, no uses una *template* ya que eso lo harás en el ejercicio siguiente.
-
 Recuerda que para que se actualicen los datos visibles debes llamar a `tableView.reloadData()`
 
 Una vez comprobado que funciona, **mejora la fetch request para que las notas aparezcan en orden inverso por fecha**, de más reciente a más antigua e imprimiendo los resultados en la consola con `print` 
