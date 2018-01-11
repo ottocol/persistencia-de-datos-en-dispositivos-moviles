@@ -51,13 +51,5 @@ Hecha toda la preparación de la interfaz, falta implementar la búsqueda en sí
 
 Recuerda que para que se actualicen los datos visibles debes llamar a `tableView.reloadData()`
 
-Una vez comprobado que funciona, **mejora la fetch request para que las notas aparezcan en orden inverso por fecha**, de más reciente a más antigua
-
-### Uso de una *fetch request template* (0,4 puntos)
-
-Editar el modelo de datos y añadir una *fetch request template*, llamada `Universidad` que devuelva todas las notas cuyo texto contenga la subcadena `#uni`. 
-
-> En el editor del modelo de datos, pulsa sobre el botón de “Add Entity” y mantenlo pulsado unos segundos para que aparezca la opción de “Add Fetch Request”. También puedes hacerlo desde el menú `Editor`.
-
-Para no complicar en exceso la interfaz, prueba simplemente su funcionamiento por código, llamándola desde el `viewDidLoad` del `ViewController` e imprimiendo los resultados en la consola con `print` 
+Una vez comprobado que funciona, **mejora la fetch request para que las notas aparezcan en orden inverso por fecha**, de más reciente a más antigua e imprimiendo los resultados en la consola con `print` 
 
