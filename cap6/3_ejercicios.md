@@ -49,5 +49,5 @@ Hecha toda la preparación de la interfaz, falta implementar la búsqueda en sí
 
 Recuerda que para que se actualicen los datos visibles debes llamar a `tableView.reloadData()`
 
-Una vez comprobado que funciona, **mejora la fetch request para que las notas aparezcan en orden inverso por fecha**, de más reciente a más antigua e imprimiendo los resultados en la consola con `print` 
+Una vez comprobado que funciona, **mejora la fetch request para que las notas aparezcan en orden inverso por fecha**, de más reciente a más antigua. 
 
