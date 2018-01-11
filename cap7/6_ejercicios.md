@@ -1,28 +1,28 @@
 # Ejercicio: uso de fetched results controller
 
-Vamos a ampliar la dichosa aplicación de notas para que use un *fetched results controller*.
-
 > Las modificaciones de estos ejercicios no afectan al código de las sesiones anteriores, así que no es necesario que hagas ninguna copia del estado del proyecto antes de empezar con esta sesión.
 
-## Interfaz gráfico (0,2)
+Vamos a ampliar la dichosa aplicación de notas para que use un *fetched results controller*. Para no afectar a lo ya hecho, haremos una tercera pantalla con un listado de todas las notas usando un `FetchedResultsController` (no es necesario implementar búsqueda como tienes en el otro listado)
 
-Añade una tercera pantalla (un `Table View Controller`) a la aplicación de notas en la que se vea un listado de todas las notas usando un `NSFetchResultsController` (no es necesario implementar búsqueda). Conecta la primera pantalla a esta (`Ctrl+Arrastrar` y elegir como tipo de *segue* `View Controllers`). Al final en la aplicación tendrás un *tab bar* con tres opciones.
+## Interfaz gráfico (1)
+
+Crea una nueva pantalla de tipo `Table View Controller`. Conecta la primera pantalla a esta (`Ctrl+Arrastrar` y elegir como tipo de *segue* `View Controllers`). Al final en la aplicación tendrás un *tab bar* con tres opciones.
 
 > Haz una tercera pantalla, no cambies la que tenías para que no se pierda el código que hiciste en la sesión anterior. Evidentemente en una aplicación "normal" no tendría sentido tener dos pantallas con la lista de notas.
 
-Para esta pantalla, crea una nueva clase `ListaNotasCDController` (de “Core Data”) que herede de `UITableViewController`. Recuerda que para que tu clase herede de una de iOS lo más sencillo es usar la plantilla "Cocoa Touch Class". 
+Para esta pantalla, crea una nueva clase `ListaNotasCDController` ("CD" de “Core Data”) que herede de `UITableViewController`. Recuerda que para que tu clase herede de una de iOS lo más sencillo es usar la plantilla "Cocoa Touch Class". 
 
 Recuerda hacer en el *storyboard* que esta clase sea el *controller* de esta pantalla. Para ello, selecciona la pantalla de listado de notas (*clic* en el primero de los iconos de la barra superior, el de fondo amarillo)  y en el Identity Inspector ( tercero de los iconos del área de la derecha), como "Custom Class" elige `ListaNotasCDController`.
 
 ![](img/set_controller.png)
 
-## Implementación (0,8)
+## Implementación (5)
 
-- Siguiendo el código de los apuntes y las transparencias haz que se use un *fetched results controller* para mostrar todas las notas.
+Siguiendo el código de los apuntes y las transparencias **usa un *fetched results controller* para mostrar todas las notas en la tabla**. De momento cuando se inserten notas nuevas la lista no se actualizará. Consulta los apartados ["inicializar el fetched results..."](./2_configuracion_basica.html) y ["mostrar los datos en la tabla"](./3_tabla.html).
 
-- Una vez tengas el listado básico vamos a intentar que cuando se modifiquen notas se muestren en la tabla. Para esto hay que implementar lo que aparece en la sección ["Refrescar la tabla"](https://ottocol.gitbooks.io/persistencia-de-datos-en-dispositivos-moviles/content/cap7/4_refrescar_tabla.html) de los apuntes. Comprueba que cuando insertamos una nota nueva en la pantalla de notas se muestra en la lista del *fetched results controller*
+Una vez tengas el listado básico vamos a intentar que cuando se modifiquen notas se muestren en la tabla. Para esto **hay que implementar lo que aparece en la sección ["Refrescar la tabla"](https://ottocol.gitbooks.io/persistencia-de-datos-en-dispositivos-moviles/content/cap7/4_refrescar_tabla.html)** de los apuntes. Comprueba que cuando insertamos una nota nueva en la pantalla de notas se muestra en la lista del *fetched results controller*
  
-- Para ver cómo se modifican las filas "en directo", haz que se puedan borrar notas haciendo *swipe to delete* en la tabla. Para que funcione este gesto, hay que implementar el método
+Para ver cómo se modifican las filas "en directo", haz que se puedan borrar notas haciendo *swipe to delete* en la tabla. Para que funcione este gesto, hay que implementar el método
 
 ```swift
 override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {

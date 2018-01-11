@@ -1,5 +1,5 @@
 
-## Mostrar los datos en la tabla
+## Mostrar los datos en la tabla {#mostrar_datos}
 
 Recordemos que las tablas toman los datos de su *datasource*, un objeto que debe implementar una serie de métodos que sirven para devolver el contenido: devolver el número de secciones, devolver el número de filas en una sección y devolver una fila en concreto. El API de *fetched results controller* tiene métodos para hacer precisamente esto, así que en nuestro código nos limitaremos más o menos a "pasarle la pelota".
 
