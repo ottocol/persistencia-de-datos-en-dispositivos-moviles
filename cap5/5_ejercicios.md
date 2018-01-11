@@ -60,7 +60,7 @@ miArray.joined(separator:"/")  //devolvería "hola/mundo"
 > Lo sé, parece un poco tonto separar un String en un array y volver a juntarlo para mostrarlo, pero los *tags* están almacenados de modo mejor estructurado como array, y la forma más sencilla de mostrarlos es como String 
 
 
-### Añadir otra entidad (4 puntos)
+### Añadir otra entidad (5 puntos)
 
 Queremos que las notas puedan estar agrupadas en "libretas". Cada libreta contendrá muchas notas, pero cada nota solo puede estar en una libreta.
 
