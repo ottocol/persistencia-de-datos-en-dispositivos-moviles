@@ -61,7 +61,7 @@ import Foundation
 
 extension Nota {
     //Devuelve una subcadena solo con la primera letra del texto
-    var inicial: String? {
+    @objc var inicial: String? {
         if let textoNoNil = self.texto {
             let pos2 = textoNoNil.index(after: textoNoNil.startIndex)
             return textoNoNil.substring(to:pos2)
