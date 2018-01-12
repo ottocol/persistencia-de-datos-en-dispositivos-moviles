@@ -26,6 +26,7 @@ El protocolo tiene cuatro métodos que vamos a ver a continuación.
 
 Cuando se van a modificar los datos y cuando ya se han modificado el *fetched results controller* avisará a su *delegate* llamando a `controllerWillChangeContent` y `controllerDidChangeContent`, respectivamente. Podemos aprovechar estos dos métodos para llamar al `beginUpdates()` y `endUpdates` de la tabla. De este modo si se modifican varias filas "de golpe" la animación se hará de forma conjunta.
 
+
 ```swift
 func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
     self.tableView.beginUpdates()

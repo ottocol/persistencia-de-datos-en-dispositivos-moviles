@@ -1,12 +1,12 @@
 
-## Inicializar el "fetched results controller"
+## Inicializar el "fetched results controller" {#inicializar_frc}
 
 Vamos a empezar con un *fetched results controller* "mínimo". Supondremos que estamos usando un *view controller* que hereda de `UITableViewController` (aunque no va a haber gran diferencia si no usamos esta clase).
 
 Lo primero es crear el `NSFetchedResultsController`. Para ello necesitamos como mínimo dos cosas:
 
 - Asociarle una *fetch request*, que devuelva los datos que queramos mostrar en la tabla.
-- Que dicha *request* esté ordenada. Ya hemos visto que Core Data no asegura por defecto un orden determinado al obtener los resultados de una *fetch request*, pero las filas de la tabla sí tienen un orden definido, por lo que necesitamos que los resultados también lo tengan.
+- Que dicha *request* esté ordenada. Ya hemos visto que Core Data no asegura por defecto un orden determinado al obtener los resultados de una *fetch request*, pero las filas de la tabla sí tienen un orden definido, por lo que necesitamos que los resultados también lo tengan. O sea, necesitamos que la *request* use `NSSortDescriptor`.
 
 Además podemos crear una *cache* para que sea más eficiente. Como veremos es muy sencillo y no requiere casi trabajo por nuestra parte. 
 
@@ -23,7 +23,6 @@ class MiController : UITableViewController {
 }
 ```
 
-
 > En el ejemplo hemos usado un `UITableViewController`, pero nos serviría cualquier `ViewController`.
 
 Ahora podemos inicializar el *fetched results controller* en el `viewDidLoad`
@@ -36,7 +35,6 @@ override func viewDidLoad() {
     let miContexto = miDelegate.persistentContainer.viewContext
     
     let consulta = NSFetchRequest<Mensaje>(entityName: "Mensaje")
-    
     let sortDescriptors = [NSSortDescriptor(key:"fecha", ascending:false)]
     consulta.sortDescriptors = sortDescriptors
     self.frc = NSFetchedResultsController<Mensaje>(fetchRequest: consulta, managedObjectContext: miContexto, sectionNameKeyPath: nil, cacheName: "miCache")
@@ -46,11 +44,12 @@ override func viewDidLoad() {
 }
 ```
 
-Nótese que al inicializador debemos pasarle tres parámetros:
+Nótese que al inicializador debemos pasarle cuatro parámetros:
 
+- La *fetch request* para filtrar los datos, que además debe estar ordenada con `sortDescriptors`
 - El contexto de persistencia
 - Un sitio de donde sacar cómo se divide la tabla en secciones. Por el momento generamos una única sección por lo que ponemos esto a `nil`
-- Una *cache* a usar. Aunque hablaremos luego de ella, es tan sencillo crearla que ya lo hemos hecho aquí. Basta con elegir un nombre que no usemos para otro *fetched results controller*
+- Una *cache* a usar. Aunque hablaremos luego de ella, es tan sencillo crearla que ya lo hemos hecho aquí. Basta con elegir un nombre que no usemos para otro *fetched results controller*.
  
 Una vez inicializado el *controller* llamamos a `performFetch` para que se ejecute la consulta.
 
