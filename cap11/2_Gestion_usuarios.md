@@ -24,22 +24,110 @@ Los usuarios en Firebase tienen una serie de propiedades básicas: un *id* únic
 
 Aunque Firebase permite que los usuarios puedan autentificarse con credenciales de Google, Facebook, Twitter, ... aquí solo veremos la autentificación con contraseña, es decir, los usuarios van a darse de alta en nuestra *app* y elegir un login (que debe ser su *email*) y un *password*. *passwors* no lo podremos consultar desde nuestra *app*, solo modificar). Para ver cómo autentificarse con identidades federadas, consultar la [documentación de Firebase](https://firebase.google.com/docs/auth/ios/start#next_steps)
 
+Como veremos, la mayoría de métodos del API son asíncronos, ya que requieren de interacción con el servidor y hacerlos síncronos bloquearía la *app* hasta que este respondiera. Los métodos asíncronos del API tienen como último parámetro  una clausura que se ejecutará cuando el servidor complete la operación.
 
 #### Dar de alta usuarios
 
 Para **dar de alta un usuario** llamaremos al método `createUser(withEmail:,password:,completion:)`. Es un método asíncrono, su último parámetro es una clausura que se ejecutará cuando se complete en el servidor el proceso de registro. Por ejemplo:
 
+```swift
+Auth.auth().createUser(withEmail: email, password: password) { 
+    (user, error) in
+    if let error = error {
+        print("Error")
+    }
+    else {
+        print("Dado de alta usuario con email: \(user.email)")
+    }
+}
+```
 
-
-Como es lógico, antes de poder llamar a este método tenemos que haber hecho algún formulario para que el usuario rellene sus datos, pedirle dos veces la contraseña para chequear errores, etc. Llamaremos al método `createUser` solo cuando hayamos validado que los datos son correctos.
+Como es lógico, antes de poder llamar a este método tenemos que haber hecho algún formulario para que el usuario rellene sus datos, pedirle dos veces la contraseña para chequear errores, etc. Esto es tarea nuestra y de ello no se va a ocupar `createUser`. Llamaremos a este método solo cuando hayamos validado que los datos introducidos por el usuario son correctos (que el email no está vacío y tiene un formato adecuado, que los dos *passwords* del formulario coinciden, ...).
 
 > Como crear las pantallas de alta, login, etc es un proceso tedioso, en Firebase existe un módulo denominado `FirebaseUI` que implementa la interfaz de las operaciones más comunes. Podéis consultar más información en la [documentación de Firebase](https://firebase.google.com/docs/auth/ios/firebaseui).
 
-Nótese además que el `createUser` solo rellena los datos más básicos, para rellenar el resto de datos usaremos la funcionalidad de actualizar perfil
+```swift
+Auth.auth().createUser(withEmail: email, password: password) { 
+  (user, error) in
+  if let user = user {
+    print("Registrado \(user.email)")
+  }
+  else {
+    print(error)
+  }
+}
+```
+
+Nótese además que el `createUser` solo rellena los datos más básicos, para rellenar el resto de datos usaremos la funcionalidad de actualizar perfil.
 
 #### Modificar el perfil de un usuario
 
-#### Dar de baja
+Para modificar los datos de un usuario, el objeto usuario correspondiente debe llamar a `createProfileChangeRequest`, hacemos los cambios y finalmente llamamos a `commitChanges(completion:)`, que es asíncrono, y al que se le pasa una clausura a ejecutar cuando los cambios se hagan efectivos en el servidor. 
+
+Para obtener el usuario autentificado actualmente en la *app* accedemos a la propiedad `Auth.auth().currentUser`. Si es `nil` no hay ningún usuario autentificado.
+
+```swift
+let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
+changeRequest?.displayName = displayName
+changeRequest?.commitChanges { (error) in
+  if let error = error {
+     print("Error: \(error)")
+  } 
+  else {
+     print("Perfil actualizado OK")
+  }
+}
+```
+
+Hay métodos individuales para actualizar el *email* y el *password*: `updateEmail` y `updatePassword`. Son métodos asíncronos, y como parámetro, además del nuevo valor, pasaremos una clausura a ejecutar cuando acabe la operación:
+
+```swift
+Auth.auth().currentUser?.updateEmail(to: email) { (error) in
+  // ...
+}
+Auth.auth().currentUser?.updatePassword(to: password) { (error) in
+  // ...
+}
+```
+
+Por razones de seguridad, cuando un usuario cambia su dirección de correo electrónico, se le envía un *email* a la su dirección  para que pueda consultar el cambio. Se puede cambiar la plantilla que se usa para este email en la consola de Firebase, en el apartado: `Autenticación > Plantillas`.
+
+En lugar de actualizar el *password* directamente, podemos enviarle al usuario el típico mensaje de *resetear password*, con un enlace en el que se hace *clic* se saltará a una página (hecha por Google) con un formulario para cambiar el *password*.  
+
+#### Dar de baja a un usuario
+
+Para borrar a un usuario, usamos `delete`, que de nuevo es un método asíncrono:
+
+```swift
+let user = Auth.auth().currentUser
+user?.delete { error in
+  if let error = error {
+    print("Error")
+  } else {
+    print("Cuenta dada de baja")
+  }
+}
+```
 
 ### Autentificación
 
+Para *hacer login* en la aplicación, llamamos al método `signIn`, que como viene siendo habitual es asíncrono.
+
+```swift
+Auth.auth().signIn(withEmail: email, password: password) { 
+  (user, error) in
+  if let error = error {
+    print("Error")
+  } else {
+    print("Login de: \(user.email)")
+  }
+}
+```
+
+como ya hemos visto en el apartado anterior, para saber el usuario actual accedemos a `Auth.auth().currentUser`.
+
+Hay que destacar que el estado de "login" se guarda de manera persistente, así que si salimos de la aplicación y volvemos a entrar, el usuario seguirá estando activo hasta que cerremos explícitamente la sesión. Para cerrar la sesión, llamar al método `signOut`, que es síncrono:
+
+```swift
+
+``
