@@ -126,8 +126,27 @@ Auth.auth().signIn(withEmail: email, password: password) {
 
 como ya hemos visto en el apartado anterior, para saber el usuario actual accedemos a `Auth.auth().currentUser`.
 
-Hay que destacar que el estado de "login" se guarda de manera persistente, así que si salimos de la aplicación y volvemos a entrar, el usuario seguirá estando activo hasta que cerremos explícitamente la sesión. Para cerrar la sesión, llamar al método `signOut`, que es síncrono:
+Hay que destacar que la "sesión" actual se guarda de manera persistente, así que si salimos de la aplicación y volvemos a entrar, el usuario seguirá estando activo hasta que cerremos explícitamente la sesión. Para cerrar la sesión, llamar al método `signOut`, que es síncrono:
 
 ```swift
+do {
+  try Auth.auth().signOut()
+} catch let signOutError as NSError {
+  print("Error cerrando la sesión: \(signOutError)")
+}
+```
 
+Podemos detectar el *sign-in* y *sign-out* del usuario con `addStateDidChangeListener`. Le pasaremos una clausura que se ejecutará cuando se haga una de estas dos operaciones, es decir, es un *listener* del cambio de estado. Típicamente se usa para mostrar el estado actual en la interfaz de usuario, por lo que normalmente se añadirá el *listener* al mostrar la pantalla con los datos, es decir en el `viewWillAppear` del controlador de la vista:
+
+```swift
+//donde "handle" sería una propiedad del view controller
+self.handle = Auth.auth().addStateDidChangeListener { (auth, user) in
+  // ...
+}
+```
+
+El valor de retorno del método anterior se usa para eliminar el *listener*. Habitualmente el lugar más apropiado es cuando salimos de la pantalla, en el `viewWillDisappear`) del controlador de la vista:
+
+```swift
+Auth.auth().removeStateDidChangeListener(self.handle)
 ``
