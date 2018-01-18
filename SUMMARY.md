@@ -46,7 +46,7 @@
     - [Ejercicios](cap8/5_ejercicios.md)
     - [Apéndice: migraciones en iOS<=9](cap8/apendice_migraciones_ios9.md)
 * [Contextos múltiples](cap9/intro.md)
-    - [Múltiples contextos para trabajos en *background*](1_background.md)
+    - [Múltiples contextos para trabajos en *background*](cap9/1_background.md)
     - [Comunicación entre contextos](cap9/2_comunicacion.md)
     - [Contextos anidados](cap9/3_contextos_anidados.md)
     - [Ejercicios](cap9/4_ejercicios.md)

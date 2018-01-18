@@ -5,7 +5,7 @@ El contexto de persistencia está conectado con un *Persistent Store Coordinator
 
 En iOS5 se introdujo la posibilidad de tener un contexto "conectado" con otro en lugar de con un *coordinator*. Esto se conoce también como *contexto hijo*. El hijo está "conectado" con el padre y el padre es el "conectado" al *coordinator*. Cuando desde el hijo se hace un `save` no se están guardando los datos en el almacenamiento persistente, sino en el contexto padre.  Los objetos guardados desde el contexto hijo son "pendientes de guardar" para el padre. Es decir, es una operación puramente en memoria. Para guardarlos en el almacenamiento persistente el padre también tendría que hacer `save`. 
 
-![](img/multiples_contextos.png)
+![](img/contexto_hijo.png)
 
 
 Cuando un contexto está "conectado" a un "persistent store coordinator" fijamos el valor de su propiedad `persistentStoreCoordinator`. Para indicar que está conectado a otro contexto "padre" fijamos el valor de `parent`
