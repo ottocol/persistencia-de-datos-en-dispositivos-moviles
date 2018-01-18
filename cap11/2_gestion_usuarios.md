@@ -17,6 +17,13 @@ pod 'Firebase/Auth'
 
 tras ello, ejecutar en la consola `pod install`.
 
+Todas las funcionalidades de este API están en el módulo `FirebaseAuth` por lo que en nuestro código necesitaremos un 
+
+```swift
+import FirebaseAuth
+```
+
+Podéis consultar *online* y traducida al español la [documentación de las librerías de iOS](https://firebase.google.com/docs/auth/ios/start) para gestión de usuarios y autentificación.
 
 ### Administración de usuarios
 

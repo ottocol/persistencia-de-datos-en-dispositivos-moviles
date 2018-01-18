@@ -1,0 +1,29 @@
+<html>
+<head>
+  <style>
+    #db {
+        font-family: Courier New, Courier, monospace;
+    }
+  </style>
+</head>
+<body>
+    <textarea id="db" rows="50" cols="80" disabled></textarea>
+    <script src="https://www.gstatic.com/firebasejs/4.8.2/firebase.js"></script>
+    <script>
+      // Initialize Firebase
+      var config = {
+        apiKey: "AIzaSyACGqX2nFDG0ic8VI0bpRCGItoS1P3Kdfk",
+        authDomain: "prueba-mm.firebaseapp.com",
+        databaseURL: "https://prueba-mm.firebaseio.com",
+        projectId: "prueba-mm",
+        storageBucket: "prueba-mm.appspot.com",
+        messagingSenderId: "53897478411"
+      };
+      firebase.initializeApp(config);
+      var database = firebase.database()
+      database.ref().on('value', function(snapshot) {
+          document.getElementById('db').value = JSON.stringify(snapshot.val(), null, 3)
+      })
+    </script>
+</body>
+</html>
