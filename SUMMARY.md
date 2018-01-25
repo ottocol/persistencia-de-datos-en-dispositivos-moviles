@@ -60,6 +60,8 @@
     - [Model/View/Presenter](cap10/3_MVP.md)
     - [Model/View/ViewModel](cap10/4_MVVM.md)
     - [VIPER](cap10/5_VIPER.md)
+    - [Ejercicios parte I](cap10/6a_ejercicios1.md)
+    - [Ejercicios parte II](cap10/6_ejercicios.md)
     
     
 

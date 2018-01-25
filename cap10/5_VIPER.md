@@ -8,7 +8,7 @@ VIPER (View/Interactor/Presenter/Entity/Router) es una arquitectura que intenta 
 
 VIPER es una adaptación a iOS de la *Clean Architecture* propuesta por el "gurú" de la ingeniería del software [Robert C. Martin](http://blog.cleancoder.com/), conocido familiarmente como "Uncle Bob". El *tío Bob* ha explicado los detalles de su *clean architecture* en múltiples ocasiones, por ejemplo en [su blog](https://8thlight.com/blog/uncle-bob/2012/08/13/the-clean-architecture.html) y en [algunas charlas](https://www.youtube.com/watch?v=Nsjsiz2A9mg). VIPER aparece descrito por primera vez en [este artículo](https://www.objc.io/issues/13-architecture/viper/) de 2014.
 
-Una de las ideas básicas de la *Clean Architecture* y por tanto de VIPER es llevar a la práctica el principio de responsabilidad única (*Single Responsibility Principe*), un principio básico en el diseño y desarrollo de software que sostiene que cada componente debería tener una única responsabilidad o funcionalidad en el sistema. Esto no solo mejora la estructuración del código, sino que también facilita el *testing* y mejora la mantenibilidad de la aplicación.
+Igual que sucedía con los "controladores ligeros" en MVC, una de las ideas básicas de la *Clean Architecture* y por tanto de VIPER es llevar a la práctica el "Principio de Única Responsabilidad".
 
 ## Componentes de la arquitectura
 
