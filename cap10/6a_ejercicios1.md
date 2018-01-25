@@ -1,8 +1,8 @@
 ## Ejercicios de arquitecturas iOS, parte I
 
-En la aplicación de Notas que venimos desarrollando en la asignatura, el *view ontroller* `ListaNotasController` tiene demasiadas funcionalidades.
+En la aplicación de Notas que venimos desarrollando en la asignatura, el *view controller* `ListaNotasController` tiene demasiadas funcionalidades.
 
-Separa los métodos que implementan el *datasource* de la tabla en una clase aparte:
+**(4 puntos)** Separa los métodos que implementan el *datasource* de la tabla en una clase aparte:
   - Crea la clase `ListaNotasDatasource`:
     - Añádele un método `setLista()` que reciba un array de notas (`[Nota]`) como parámetro y se lo guarde en una propiedad de la clase llamada `listaNotas`
     - Llévate a esta clase el código de los métodos que implementan el *datasource*
