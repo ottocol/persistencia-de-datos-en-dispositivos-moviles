@@ -20,7 +20,7 @@ nuevaNota.set(value:"EL TEXTO QUE HAGA FALTA ASIGNAR", forKey:"texto")
 nuevaNota.fecha = "EL TEXTO QUE HAGA FALTA ASIGNAR"
 ```
 
-### Validación de datos (1 punto)
+### Validación de datos (1.5 puntos)
 
 Queremos validar que la nota no esté vacía antes de guardarla. Para ello:
 
@@ -34,7 +34,7 @@ miContexto.refresh(nuevaNota, mergeChanges: false)
 
 que sincroniza el objeto con la BD, en este caso como la nota todavía no está guardada, descarta los cambios.
 
-### Transformables (1 punto)
+### Transformables (1.5 puntos)
 
 Vamos a añadirle a cada nota un atributo que sea un array de *tags*, o palabras clave. Es decir, un array de Strings.
 
@@ -60,7 +60,7 @@ miArray.joined(separator:"/")  //devolvería "hola/mundo"
 > Lo sé, parece un poco tonto separar un String en un array y volver a juntarlo para mostrarlo, pero los *tags* están almacenados de modo mejor estructurado como array, y la forma más sencilla de mostrarlos es como String 
 
 
-### Añadir otra entidad (4 puntos)
+### Añadir otra entidad (6 puntos)
 
 Queremos que las notas puedan estar agrupadas en "libretas". Cada libreta contendrá muchas notas, pero cada nota solo puede estar en una libreta.
 

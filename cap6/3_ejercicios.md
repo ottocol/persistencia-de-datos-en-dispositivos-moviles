@@ -43,7 +43,7 @@ func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
 
 > Verás que *la barra de búsqueda se desplaza hacia arriba* de la pantalla si nos desplazamos por la tabla. Para que permanezca fija, lo más sencillo es no usar el `Table View Controller` del interfaz gráfico de Xcode, ya que su tabla “ocupa toda la pantalla” (la vista es la tabla en sí). En su lugar usaríamos un `View controller` normal y a él arrastraríamos una `table view` dándole las dimensiones deseadas y luego la `search bar`. Eso sí, tendremos que establecer  manualmente las conexiones de tipo *datasource* y *delegate* entre la vista de tabla y el controller, que con el `Table View Controller` son automáticas.
 
-### Implementación del código de búsqueda (2 puntos)
+### Implementación del código de búsqueda (3 puntos)
 
 Hecha toda la preparación de la interfaz, falta implementar la búsqueda en sí. En el método `searchBarSearchButtonClicked` **debes crear una fetch request que busque las notas cuyo texto contenga la cadena escrita** en la barra de búsqueda, sin distinguir mayúsculas/minúsculas o caracteres diacríticos. 
 
