@@ -34,9 +34,9 @@ miContexto.refresh(nuevaNota, mergeChanges: false)
 
 que sincroniza el objeto con la BD, en este caso como la nota todavía no está guardada, descarta los cambios.
 
-### Transformables (2 puntos)
+### Transformables (1 punto)
 
-Vamos a añadirle a cada nota un atributo que sea un array de *tags*, o palabras clave, dicho de otro modo. Es decir, un array de Strings.
+Vamos a añadirle a cada nota un atributo que sea un array de *tags*, o palabras clave. Es decir, un array de Strings.
 
 1. Añade el atributo, llamado `tags` en el editor del modelo. Asígnale como tipo `Transformable`
 2. En las propiedades del atributo, en el cuadro de texto `Custom class` puedes teclear el tipo deseado. Por defecto es `NSObject`, simplemente un objeto cualquiera (algo así como el `Any` de Swift). Cámbialo tecleando `[String]`
@@ -60,7 +60,7 @@ miArray.joined(separator:"/")  //devolvería "hola/mundo"
 > Lo sé, parece un poco tonto separar un String en un array y volver a juntarlo para mostrarlo, pero los *tags* están almacenados de modo mejor estructurado como array, y la forma más sencilla de mostrarlos es como String 
 
 
-### Añadir otra entidad (5 puntos)
+### Añadir otra entidad (4 puntos)
 
 Queremos que las notas puedan estar agrupadas en "libretas". Cada libreta contendrá muchas notas, pero cada nota solo puede estar en una libreta.
 
