@@ -1,6 +1,6 @@
 ## Ejercicios
 
-En las plantillas de la sesión hay un [proyecto llamado `PruebaContextosMultiples`](material/PruebaContextosMultiples_plantilla.zip) que servirá como base para los ejercicios de la sesión. La aplicación solo tiene una pantalla con un listado de notas (no se pueden crear ni modificar). Hay dos operaciones costosas: exportar las notas y refrescar el listado con datos que vengan del servidor. En ambos casos el coste es simulado ya que ni se exportan de verdad ni se actualizan desde ningún servidor (ejem). El coste se simula "durmiendo" al hilo actual con la instrucción `usleep`.
+En las plantillas de la sesión hay un proyecto llamado `PruebaContextosMultiples` que servirá como base para los ejercicios de la sesión. La aplicación solo tiene una pantalla con un listado de notas (no se pueden crear ni modificar). Hay dos operaciones costosas: exportar las notas y refrescar el listado con datos que vengan del servidor. En ambos casos el coste es simulado ya que ni se exportan de verdad ni se actualizan desde ningún servidor (ejem). El coste se simula "durmiendo" al hilo actual con la instrucción `usleep`.
 
 Cuando la aplicación se carga, si no hay datos automáticamente inserta 500 objetos en la base de datos.
 
