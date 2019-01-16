@@ -5,7 +5,7 @@ Vamos a hacer un par de modificaciones sobre el modelo de datos de (¡cómo no!)
 > Antes de ponerte a hacer las modificaciones de esta sesión asegúrate de que has hecho un `commit` con el mensaje `terminada sesión 7`. También puedes hacer un `.zip` con el proyecto, llamarlo `notas_sesion_7.zip` y adjuntarlo en las entregas de la asignatura. Así cuando se evalúe el ejercicio el profesor podrá consultar el estado que tenía la aplicación antes de estos ejercicios.
 
 
-## Migraciones “ligeras” (2 puntos)
+## Migraciones “ligeras” (1 punto)
 
 - Ve al modelo de datos y crea una nueva versión con `Editor > Add model version...`
 - Edita esta nueva versión y en ella cambia de nombre el campo “texto” por “contenido”. 

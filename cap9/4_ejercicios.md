@@ -5,11 +5,11 @@ En las plantillas de la sesión hay un proyecto llamado `PruebaContextosMultiple
 Cuando la aplicación se carga, si no hay datos automáticamente inserta 500 objetos en la base de datos.
 
 
-### Contextos múltiples para operaciones en *background* (3 puntos)
+### Contextos múltiples para operaciones en *background* (2 puntos)
 
 Pulsa sobre el botón de "exportar". Verás que la operación tarda 2-3 segundos. Si intentas hacer *scroll* de la pantalla durante este tiempo no podrás, ya que se queda bloqueada. Hay que solucionar esto.
 
-verás que en el método `botonExportarPulsado` del *view controller* se llama a un método que (de modo simulado) exporta las notas y que es el "culpable" del bloqueo. El método admite como parámetro el contexto de persistencia. **Cambia el código para que esta operación se haga en un nuevo contexto en background**.
+verás que en el método `botonExportarPulsado` del *view controller* se llama a un método que (de modo simulado) exporta las notas y que es el "culpable" del bloqueo. El método admite como parámetro el contexto de persistencia. **Cambia el código para que esta operación se haga en un nuevo contexto en background**. Recuerda que las operaciones de interfaz (como mostrar el alert tras la exportación) deben hacerse en el *thread* principal.
 
 
 ### Comunicar contextos entre sí (3 puntos)
@@ -18,7 +18,7 @@ Si haces "pull to refresh" de la tabla, de modo simulado se conecta con el servi
 
 Para que puedas ver que efectivamente se insertan datos, puedes pulsar primero el botón "Borrar todas", que elimina todos los datos
 
-En el método `handleRefresh` del *view controller* se llama a otro método que supuestamente conecta con el servidor y inserta los nuevos datos en el contexto de persistencia. 
+Cuando se hace "pull to refresh" se llama al método `handleRefresh` del *view controller*. En este se llama a `refrescarDatosDeServidor`, que supuestamente conecta con el servidor y inserta los nuevos datos en el contexto de persistencia. 
 
 > Los datos se actualizan en pantalla automáticamente porque usamos un *fetched results controller* que los está escuchando, y puedes ver en el código que el *view controller* actúa como su `delegate`, actualizando la tabla si es necesario.
 
