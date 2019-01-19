@@ -20,7 +20,7 @@ tras ello, ejecutar en la consola `pod install`.
 Todas las funcionalidades de este API están en el módulo `FirebaseAuth` por lo que en nuestro código necesitaremos un 
 
 ```swift
-import FirebaseAuth
+import Firebase
 ```
 
 Podéis consultar *online* y traducida al español la [documentación de las librerías de iOS](https://firebase.google.com/docs/auth/ios/start) para gestión de usuarios y autentificación.
@@ -31,20 +31,24 @@ Los usuarios en Firebase tienen una serie de propiedades básicas: un *id* únic
 
 Aunque Firebase permite que los usuarios puedan autentificarse con credenciales de Google, Facebook, Twitter, ... aquí solo veremos la autentificación con contraseña, es decir, los usuarios van a darse de alta en nuestra *app* y elegir un login (que debe ser su *email*) y un *password*. *passwors* no lo podremos consultar desde nuestra *app*, solo modificar). Para ver cómo autentificarse con identidades federadas, consultar la [documentación de Firebase](https://firebase.google.com/docs/auth/ios/start#next_steps)
 
-Como veremos, la mayoría de métodos del API son asíncronos, ya que requieren de interacción con el servidor y hacerlos síncronos bloquearía la *app* hasta que este respondiera. Los métodos asíncronos del API tienen como último parámetro  una clausura que se ejecutará cuando el servidor complete la operación.
+Como veremos, la mayoría de métodos del API son asíncronos, ya que requieren de interacción con el servidor y hacerlos síncronos bloquearía la *app* hasta que este respondiera. Los métodos asíncronos del API tienen como último parámetro  una clausura que se ejecutará cuando el servidor complete la operación. 
+
+La clausura a ejecutar recibe como parámetro un error en caso de haberse producido alguno, y además en algunos métodos recibe un parámetro adicional con el resultado de la operación si ha sido exitoso.
 
 #### Dar de alta usuarios
 
-Para **dar de alta un usuario** llamaremos al método `createUser(withEmail:,password:,completion:)`. Es un método asíncrono, su último parámetro es una clausura que se ejecutará cuando se complete en el servidor el proceso de registro. Por ejemplo:
+Para **dar de alta un usuario** llamaremos al método `createUser(withEmail:,password:,completion:)`. Es un método asíncrono, su último parámetro es una clausura que se ejecutará cuando se complete en el servidor el proceso de registro. Como ya se ha dicho esta clausura recibe como parámetro el error producido, si lo hay. Si no ha habido error, además como primer parámetro se recibe un objeto de tipo `AuthDataResult` con el resultado de la operación. Dentro de este objeto el campo `user` contiene información sobre el usuario recién creado. 
+
+Por ejemplo:
 
 ```swift
 Auth.auth().createUser(withEmail: email, password: password) { 
-    (user, error) in
+    (result, error) in
     if let error = error {
         print("Error")
     }
     else {
-        print("Dado de alta usuario con email: \(user.email)")
+        print("Dado de alta usuario con email: \(result?.user.email!)")
     }
 }
 ```
@@ -53,25 +57,23 @@ Como es lógico, antes de poder llamar a este método tenemos que haber hecho al
 
 > Como crear las pantallas de alta, login, etc es un proceso tedioso, en Firebase existe un módulo denominado `FirebaseUI` que implementa la interfaz de las operaciones más comunes. Podéis consultar más información en la [documentación de Firebase](https://firebase.google.com/docs/auth/ios/firebaseui).
 
+Nótese además que el `createUser` solo rellena los datos más básicos, para rellenar el resto de datos usaremos la funcionalidad de actualizar perfil.
+
+#### Validar el alta de un usuario
+
+En muchos sitios web cuando un usuario se da de alta se le envía por email un *link* para que confirme el registro. En Firebase podemos hacer esto con el método `sendEmailVerification` del usuario actual. Este método pertenece al usuario autentificado .
+
+Para obtener el usuario autentificado actualmente en la *app* accedemos a la propiedad `Auth.auth().currentUser`. Si es `nil` no hay ningún usuario autentificado.
+
 ```swift
-Auth.auth().createUser(withEmail: email, password: password) { 
-  (user, error) in
-  if let user = user {
-    print("Registrado \(user.email)")
-  }
-  else {
-    print(error)
-  }
+Auth.auth().currentUser?.sendEmailVerification { (error) in
+  // ...
 }
 ```
-
-Nótese además que el `createUser` solo rellena los datos más básicos, para rellenar el resto de datos usaremos la funcionalidad de actualizar perfil.
 
 #### Modificar el perfil de un usuario
 
 Para modificar los datos de un usuario, el objeto usuario correspondiente debe llamar a `createProfileChangeRequest`, hacemos los cambios y finalmente llamamos a `commitChanges(completion:)`, que es asíncrono, y al que se le pasa una clausura a ejecutar cuando los cambios se hagan efectivos en el servidor. 
-
-Para obtener el usuario autentificado actualmente en la *app* accedemos a la propiedad `Auth.auth().currentUser`. Si es `nil` no hay ningún usuario autentificado.
 
 ```swift
 let changeRequest = Auth.auth().currentUser?.createProfileChangeRequest()
@@ -118,20 +120,20 @@ user?.delete { error in
 
 ### Autentificación
 
-Para *hacer login* en la aplicación, llamamos al método `signIn`, que como viene siendo habitual es asíncrono.
+Para *hacer login* en la aplicación, llamamos al método `signIn`, que como viene siendo habitual es asíncrono. Si la autentificación tiene éxito se devuelve un objeto de tipo `AuthDataResult` que contiene entre otros datos la referencia al usuario autentificado en su campo `user`.
 
 ```swift
 Auth.auth().signIn(withEmail: email, password: password) { 
-  (user, error) in
+  (result, error) in
   if let error = error {
     print("Error")
   } else {
-    print("Login de: \(user.email)")
+    print("Login de: \(result?.user.email!)")
   }
 }
 ```
 
-como ya hemos visto en el apartado anterior, para saber el usuario actual accedemos a `Auth.auth().currentUser`.
+como ya hemos visto en el apartado anterior, para saber el usuario actual podemos acceder a `Auth.auth().currentUser`.
 
 Hay que destacar que la "sesión" actual se guarda de manera persistente, así que si salimos de la aplicación y volvemos a entrar, el usuario seguirá estando activo hasta que cerremos explícitamente la sesión. Para cerrar la sesión, llamar al método `signOut`, que es síncrono:
 
