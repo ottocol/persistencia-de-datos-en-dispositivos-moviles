@@ -1,6 +1,6 @@
 ## Ejercicios de Firebase
 
-En las plantillas de la sesión hay un [proyecto Xcode](material/ChatFirebase_plantilla.zip) con las librerías de Firebase ya instaladas y configuradas. El proyecto está vinculado con una aplicación ya dada de alta en el servidor de Firebase.
+En las plantillas de la sesión hay un proyecto Xcode con las librerías de Firebase ya instaladas y configuradas. El proyecto está vinculado con una aplicación ya dada de alta en el servidor de Firebase.
 
 > IMPORTANTE: para trabajar con el proyecto, **abrir el `.xcworkspace`**, NO el `.xcodeproj` que abrimos habitualmente. Al abrir el *workspace* veréis dos proyectos, uno con la *app* en sí, llamado `ChatFirebase` y otro con las librerías auxiliares llamado `pods`. Tras abrir el *workspace* lo primero que deberíais hacer es `Product > Build`.
 
@@ -52,7 +52,7 @@ Para que funcione el chat hay que implementar dos funcionalidades:
     + Generar la referencia a un nuevo nodo id hijo de la referencia anterior con `childByAutoId()` 
     + Fijar el valor de este nuevo nodo con `setValue()` a un diccionario Swift con las claves "texto" y "usuario" y que contenga el texto del mensaje y el email del usuario actual de Firebase.
 
-> Con el [HTML que se incluye en las plantillas](material/ConsolaFirebase.html) podéis ver el estado actual de la BD y podéis comprobar si se ha insertado correctamente vuestro mensaje 
+> Con el HTML que se incluye en las plantillas podéis ver el estado actual de la BD y podéis comprobar si se ha insertado correctamente vuestro mensaje 
 
 - Que cuando alguien envía un mensaje al chat este aparezca en la tabla
     - Recibir el mensaje: en el `viewWillAppear` del `ChatViewController` añadir un *listener* para que escuche el evento `.childAdded` sobre el nodo "mensajes"
