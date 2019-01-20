@@ -17,7 +17,7 @@ pod 'Firebase/Auth'
 
 tras ello, ejecutar en la consola `pod install`.
 
-Todas las funcionalidades de este API están en el módulo `FirebaseAuth` por lo que en nuestro código necesitaremos un 
+Para poder llamar a este API en nuestro código necesitaremos un 
 
 ```swift
 import Firebase

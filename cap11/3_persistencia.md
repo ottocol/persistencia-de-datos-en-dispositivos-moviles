@@ -1,6 +1,6 @@
 ## Persistencia de datos en Firebase
 
-Actualmente hay dos bases de datos disponibles en Firebase: la *realtime* database, que es la "original" y el *cloud firestore*, que se introdujo en octubre del año 2017. Ambas son bases de datos NoSQL, aunque la *realtime* tiene una estructura de datos algo más peculiar. Vamos a ver aquí la *realtime database* ya que *firestore* está todavía en *beta* y sobre la primera hay mucha más información disponible.
+Actualmente hay dos bases de datos disponibles en Firebase: la *realtime* database, que es la "original" y el *cloud firestore*, que se introdujo posteriormente. Ambas son bases de datos NoSQL, aunque la *realtime* tiene una estructura de datos algo más peculiar. Vamos a ver aquí la *realtime database*, que como su nombre indica es especialmente apropiada para aplicaciones en *tiempo real*, ya que además de poder hacer las típicas consultas podemos "escuchar" los cambios en los datos. No obstante se puede usar en cualquier tipo de aplicación.
 
 Podéis consultar *online* y traducida al español la [documentación de los APIs de iOS para la *realtime database*](https://firebase.google.com/docs/database/ios/start).
 
