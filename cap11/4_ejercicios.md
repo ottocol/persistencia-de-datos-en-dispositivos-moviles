@@ -22,7 +22,7 @@ El botón "Entrar" está conectado mediante un *segue* con la segunda pantalla, 
 Finalmente, **añade el código necesario para que al pulsar sobre `Salir`** se haga *logout* en Firebase.  
 
 
-### Mensajes del chat (6 puntos)
+### Mensajes del chat (5 puntos)
 
 Usaremos la siguiente estructura para almacenar los mensajes del chat:
 
