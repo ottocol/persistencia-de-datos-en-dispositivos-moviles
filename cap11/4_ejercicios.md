@@ -7,7 +7,7 @@ En las plantillas de la sesión hay un proyecto Xcode con las librerías de Fire
 El objetivo es desarrollar un pequeño chat con la *realtime database*. La plantilla ya tiene la interfaz hecha y hay que añadirle el código de Firebase.
 
 
-### Login/logout (2 puntos)
+### Login/logout (3 puntos)
 
 #### Pantalla inicial:
 
@@ -22,7 +22,7 @@ El botón "Entrar" está conectado mediante un *segue* con la segunda pantalla, 
 Finalmente, **añade el código necesario para que al pulsar sobre `Salir`** se haga *logout* en Firebase.  
 
 
-### Mensajes del chat (4 puntos)
+### Mensajes del chat (6 puntos)
 
 Usaremos la siguiente estructura para almacenar los mensajes del chat:
 
