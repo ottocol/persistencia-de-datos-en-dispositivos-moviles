@@ -16,3 +16,5 @@ En la aplicación de Notas que venimos desarrollando en la asignatura, el *view 
 
     - En el `viewWillAppear`, cada vez que obtengas la lista de notas con el *fetch request*, pásaselas al `ds`, con `ds.setLista()`
     - La propiedad `listaNotas` del `ListaNotasViewController` ya sobra, porque la lista ahora la maneja el *datasource*
+
+**(1 punto)** En el `ListaNotasDatasource` separa el código que se encarga de rellenar los campos de la celda y encapsúlalo en una clase aparte igual que se muestra en las transparencias
