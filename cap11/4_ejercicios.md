@@ -56,6 +56,15 @@ Para que funcione el chat hay que implementar dos funcionalidades:
 
 - Que cuando alguien envía un mensaje al chat este aparezca en la tabla
     - Recibir el mensaje: en el `viewWillAppear` del `ChatViewController` añadir un *listener* para que escuche el evento `.childAdded` sobre el nodo "mensajes"
+
+Ten en cuenta que el código que recibe el evento recibe un parámetro `snapshot` con los nuevos valores en el campo `value`. En nuestro caso será un diccionario con el texto y el usuario. Podemos hacer el *cast* a un diccionario con claves y valores `String` para poder usarlo en el código, algo como:
+
+```swift
+if let valor = snapshot.value, let v = valor as? [String:String] {
+   //Aquí ya podríamos acceder a los valores con v["texto"] y v["usuario"]
+}
+```
+
     - Cuando se reciba el evento, mostrar el mensaje en la tabla. Con el texto del mensaje y el email del usuario construir un `struct` de tipo `Mensaje` y añadirlo al array `self.mensajes` del `ChatViewController`. Para que aparezca visualmente en la tabla tienes además que añadir una fila en la posición correspondiente:
 
 ```swift
