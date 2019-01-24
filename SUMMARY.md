@@ -62,6 +62,7 @@
     - [VIPER](cap10/5_VIPER.md)
     - [Ejercicios parte I](cap10/6a_ejercicios1.md)
     - [Ejercicios parte II](cap10/6_ejercicios.md)
+    - [Ejercicios parte III](cap10/6_ejercicios_redux.md)
     
     
 
